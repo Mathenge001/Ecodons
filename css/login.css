@@ -4,11 +4,14 @@
     --afternoon-bg: linear-gradient(to right, #00bbff, #0090ca);
     --evening-bg: linear-gradient(to right, #ed723a, #804502);
     --night-bg: linear-gradient(to right, #051353, #1A237E);
+
+    /* Default background */
+    --bg-color: var(--morning-bg); /* Default to morning gradient */
 }
 
 body {
     font-family: 'Arial', sans-serif;
-    background: rgba(179, 179, 179, 0.22);
+    background: var(--bg-color); /* Apply the selected background gradient */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -86,7 +89,7 @@ body {
 }
 
 .overlay {
-    background: var(--morning-bg);
+    background: var(--bg-color); /* Use the selected background gradient */
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 0 0;
@@ -208,30 +211,54 @@ a:hover {
         padding: 20px;
     }
 
-    .sign-in-container {
-        left: 0;
-        transform: translateX(0);
+    .overlay-container {
+        display: none;
     }
 
     .sign-up-container {
+        opacity: 1;
+        z-index: 5;
+        position: absolute;
+        top: 0;
         left: 0;
-        opacity: 0;
-        z-index: 1;
         transform: translateX(100%);
+        transition: transform 0.6s ease-in-out;
+    }
+
+    .container.right-panel-active .sign-up-container {
+        transform: translateX(0%);
     }
 
     .container.right-panel-active .sign-in-container {
         transform: translateX(-100%);
     }
 
-    .container.right-panel-active .sign-up-container {
-        transform: translateX(0);
-        opacity: 1;
-        z-index: 5;
+    /* Adjust background gradients for smaller screens */
+    :root {
+        --bg-color: var(--morning-bg); /* Default to morning gradient */
     }
 
-    .overlay-container {
-        display: none;
+    @media (max-width: 768px) {
+        :root {
+            --bg-color: var(--morning-bg); /* Adjust based on time of day */
+        }
+    }
+
+    @media (max-width: 768px) and (min-height: 500px) {
+        :root {
+            --bg-color: var(--afternoon-bg); /* Adjust based on time of day */
+        }
+    }
+
+    @media (max-width: 768px) and (min-height: 700px) {
+        :root {
+            --bg-color: var(--evening-bg); /* Adjust based on time of day */
+        }
+    }
+
+    @media (max-width: 768px) and (min-height: 900px) {
+        :root {
+            --bg-color: var(--night-bg); /* Adjust based on time of day */
+        }
     }
 }
-
