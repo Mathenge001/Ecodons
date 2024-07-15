@@ -22,4 +22,51 @@ document.addEventListener("DOMContentLoaded", () => {
         e.preventDefault();
         container.classList.remove("right-panel-active");
     });
+
+    // Basic form validation and redirection logic
+    document.getElementById('signInForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        // Simulate sign-in logic (replace with actual validation)
+        alert('Sign in successful!');
+        // Redirect to home page after sign in
+        window.location.href = 'home-page.html';
+    });
+
+    document.getElementById('signUpForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        // Simulate sign-up logic (replace with actual validation)
+        alert('Sign up successful!');
+        // Redirect to create account page after sign up
+        window.location.href = 'create-account.html';
+    });
+
+    // Function to update theme based on the time of day
+    function updateTheme() {
+        const currentHour = new Date().getHours();
+        const root = document.documentElement;
+
+        if (currentHour >= 5 && currentHour < 12) {
+            root.style.setProperty('--bg-color', 'var(--morning-bg)');
+        } else if (currentHour >= 12 && currentHour < 17) {
+            root.style.setProperty('--bg-color', 'var(--afternoon-bg)');
+        } else if (currentHour >= 17 && currentHour < 20) {
+            root.style.setProperty('--bg-color', 'var(--evening-bg)');
+        } else {
+            root.style.setProperty('--bg-color', 'var(--night-bg)');
+        }
+
+        // Update greeting based on time of day
+        const greeting = document.getElementById('greeting');
+        if (currentHour >= 5 && currentHour < 12) {
+            greeting.textContent = 'Good Morning!';
+        } else if (currentHour >= 12 && currentHour < 17) {
+            greeting.textContent = 'Good Afternoon!';
+        } else if (currentHour >= 17 && currentHour < 20) {
+            greeting.textContent = 'Good Evening!';
+        } else {
+            greeting.textContent = 'Good Night!';
+        }
+    }
+
+    updateTheme();
 });
