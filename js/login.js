@@ -23,22 +23,20 @@ document.addEventListener("DOMContentLoaded", () => {
         container.classList.remove("right-panel-active");
     });
 
-    // Basic form validation and redirection logic
     document.getElementById('signInForm').addEventListener('submit', function(event) {
         event.preventDefault();
-        // Simulate sign-in logic (replace with actual validation)
+        // Add sign-in logic here
         alert('Sign in successful!');
-        // Redirect to home page after sign in
         window.location.href = 'home-page.html';
     });
 
     document.getElementById('signUpForm').addEventListener('submit', function(event) {
         event.preventDefault();
-        // Simulate sign-up logic (replace with actual validation)
+        // Add sign-up logic here
         alert('Sign up successful!');
-        // Redirect to create account page after sign up
         window.location.href = 'create-account.html';
     });
+
 
     // Function to update theme based on the time of day
     function updateTheme() {
