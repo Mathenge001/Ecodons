@@ -1,0 +1,78 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    font-family: 'Arial', sans-serif;
+}
+
+.intro {
+    text-align: center;
+    opacity: 0;
+    animation: fadeIn 2s forwards;
+}
+
+.logo {
+    width: 100px;
+    max-width: 80%;
+    animation: slideIn 2s forwards;
+}
+
+.name {
+    font-size: 2.5em;
+    margin-top: 20px;
+    animation: fadeIn 2s 2s forwards; /* Delay start by 2 seconds */
+}
+
+.tagline {
+    font-size: 1.2em;
+    margin-top: 10px;
+    animation: fadeIn 2s 3s forwards; /* Delay start by 3 seconds */
+}
+
+.greeting {
+    font-size: 1em;
+    color: #212121;
+    margin-top: 10px;
+    animation: fadeIn 2s 4s forwards; /* Delay start by 4 seconds */
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-50px);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+.fade-out {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.fade-out.visible {
+    animation: fadeOut 1s forwards;
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 1;
+    }
+}
