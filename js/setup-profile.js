@@ -59,7 +59,7 @@ function submitIndividualForm() {
                 bio
             };
             localStorage.setItem("profile", JSON.stringify(profileData));
-            window.location.href = "check-profile.html";
+            window.location.href = "home-page.html";
         };
         reader.readAsDataURL(photo);
     }
@@ -94,7 +94,7 @@ function submitOrganizationForm() {
                 bio
             };
             localStorage.setItem("profile", JSON.stringify(profileData));
-            window.location.href = "check-profile.html";
+            window.location.href = "home-page.html";
         };
         reader.readAsDataURL(photo);
     }

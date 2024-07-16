@@ -1,23 +1,35 @@
-<!-- Home Page Structure -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EcoDon - Home</title>
+    <title>Home Page</title>
     <link rel="stylesheet" href="css/home-page.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
     <div class="header">
         <h1>EcoDon</h1>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search...">
+            <button id="searchButton">Search</button>
+        </div>
         <button onclick="openModal()">+</button>
-        <button onclick="opentab('products')">Products</button>
-        <button onclick="opentab('chats')">Chats</button>
-        <button onclick="opentab('newsfeed')">Newsfeed</button>
-        <button onclick="opentab('statistics')">Statistics</button>
+        <button class="menu-icon" onclick="toggleMenu()">&#9776;</button>
+
+        <!-- Responsive navigation menu -->
+        <div class="responsive-menu" id="responsiveMenu">
+            <button class="close-menu" onclick="toggleMenu()">&times;</button>
+            <button class="menu-option">Products</button>
+            <button class="menu-option">Chats</button>
+            <button class="menu-option">Newsfeed</button>
+            <button class="menu-option">Statistics</button>
+        </div>
+
         <div class="profile" onclick="openSettings()">
-            <img id="profileImage" src="profile-pic.jpg" alt="Profile Picture">
-            <span id="profileName">John Doe</span>
+            <img id="profileImage" src="default-profile-pic.jpg" alt="Profile Picture">
+            <span id="profileName">User</span>
+            <span class="settings-icon" onclick="openSettings()">&#9881;</span>
         </div>
     </div>
 
@@ -30,90 +42,49 @@
         <button onclick="scrollToCategory('agric')">Agric Waste</button>
     </div>
 
-    <div id="itemList">
-        <!-- Items will be dynamically added here -->
-      <!-- Sample item display structure -->
-<div class="item">
-    <img src="item-photo.jpg" alt="Item Photo">
-    <h3>Item Name</h3>
-    <p>Category: Clothes</p>
-    <p>Quantity: 5 pieces</p>
-    <p>Expiration Date: 2024-08-31</p>
-    <p>Location: Nairobi, Kahawa Wendani</p>
-    <p>Source: Donated by John Doe</p>
-    <button onclick="purchaseItem()">Purchase</button>
-</div>
-
-<!-- Confirmation modal for item purchase -->
-<div id="confirmationModal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeConfirmationModal()">&times;</span>
-        <p>Did you receive the product?</p>
-        <button onclick="confirmReceived()">Yes</button>
-        <button onclick="closeConfirmationModal()">No</button>
-    </div>
-</div>
-
+    <div class="content">
+        <div class="category" id="clothes">
+            <h2>Clothes</h2>
+            <div class="items">
+                <div class="item" onclick="showItemDetails(this)" data-category="clothes" data-name="T-shirt" data-description="A comfortable cotton t-shirt" data-amount="10" data-location="Naka, Nakuru" data-expiry="" data-expiry-image="">
+                    <img src="https://i.pinimg.com/564x/07/cb/3b/07cb3b8413acfa7a02dd68deea528a11.jpg" alt="T-shirt">
+                    <p><strong>T-shirt</strong></p>
+                    <p>10 pcs</p>
+                </div>
+            </div>
+        </div>
+        <!-- Repeat the structure for other categories... -->
     </div>
 
-    <!-- Modal for adding items -->
+    <!-- Add Item Modal -->
     <div id="addItemModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Add New Item</h2>
             <form id="addItemForm">
-                <label for="itemPhoto">Photo:</label>
-                <input type="file" id="itemPhoto" name="itemPhoto" accept="image/*" required>
-
-                <label for="itemName">Item Name:</label>
-                <input type="text" id="itemName" name="itemName" placeholder="Enter item name" required>
-
-                <label for="itemCategory">Category:</label>
-                <select id="itemCategory" name="itemCategory" required>
-                    <option value="">Select...</option>
-                    <option value="clothes">Clothes</option>
-                    <option value="food">Food</option>
-                    <option value="books">Books/Stationary</option>
-                    <option value="recyclables">Recyclables</option>
-                    <option value="personal">Personal Effects</option>
-                    <option value="agric">Agric Waste</option>
-                </select>
-
-                <label for="itemQuantity">Quantity:</label>
-                <input type="text" id="itemQuantity" name="itemQuantity" placeholder="Enter quantity" required>
-
-                <label for="itemExpiration">Expiration Date:</label>
-                <input type="date" id="itemExpiration" name="itemExpiration">
-
-                <label for="itemLocation">Location:</label>
-                <input type="text" id="itemLocation" name="itemLocation" placeholder="Enter location" required>
-
-                <label for="itemSource">Source:</label>
-                <input type="text" id="itemSource" name="itemSource" placeholder="Enter source details" required>
-
-                <button type="button" onclick="submitItem()">Submit</button>
+                <!-- Form fields... -->
+                <button type="submit">Add Item</button>
             </form>
         </div>
     </div>
 
-    <!-- View Item Modal -->
-    <div id="viewItemModal" class="modal">
+    <!-- Item Detail Modal -->
+    <div id="itemDetailModal" class="modal item-detail-modal">
         <div class="modal-content">
-            <span class="close" onclick="closeViewModal()">&times;</span>
-            <div id="itemDetails">
-                <!-- Item details will be dynamically added here -->
-            </div>
-            <button onclick="markAsPurchased()">Did you get the product?</button>
-            <div id="ratingSection" style="display: none;">
-                <h3>Rate the Service</h3>
-                <select id="rating" name="rating">
-                    <option value="1">1 - Poor</option>
-                    <option value="2">2 - Fair</option>
-                    <option value="3">3 - Good</option>
-                    <option value="4">4 - Very Good</option>
-                    <option value="5">5 - Excellent</option>
-                </select>
-                <button onclick="submitRating()">Submit Rating</button>
-            </div>
+            <span class="close" onclick="closeItemDetailModal()">&times;</span>
+            <div id="itemDetailContent"></div>
+        </div>
+    </div>
+
+    <!-- Cart -->
+    <button class="cart-button" onclick="openCart()">Check Cart</button>
+
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeCart()">&times;</span>
+            <h2>Your Cart</h2>
+            <div id="cartItems"></div>
+            <button onclick="checkout()">Checkout</button>
         </div>
     </div>
 

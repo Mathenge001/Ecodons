@@ -1,93 +1,188 @@
-// Function to open the modal
+document.addEventListener("DOMContentLoaded", () => {
+    const profileData = JSON.parse(localStorage.getItem("profile"));
+    if (profileData) {
+        document.getElementById("profileImage").src = profileData.photo;
+        document.getElementById("profileName").textContent = profileData.name;
+    }
+});
+
+function openSettings() {
+    window.location.href = "check-profile.html";
+}
+
+
+
+
+let cart = [];
+
+function scrollToCategory(categoryId) {
+    document.getElementById(categoryId).scrollIntoView({ behavior: 'smooth' });
+}
+
 function openModal() {
     document.getElementById('addItemModal').style.display = 'block';
 }
 
-// Function to close the modal
 function closeModal() {
     document.getElementById('addItemModal').style.display = 'none';
 }
 
-// Function to handle item submission
-function submitItem() {
-    // Retrieve form data
-    const itemPhoto = document.getElementById('itemPhoto').files[0];
-    const itemName = document.getElementById('itemName').value;
-    const itemCategory = document.getElementById('itemCategory').value;
-    const itemQuantity = document.getElementById('itemQuantity').value;
-    const itemExpiration = document.getElementById('itemExpiration').value;
-    const itemLocation = document.getElementById('itemLocation').value;
-    const itemSource = document.getElementById('itemSource').value;
-
-    // Store data in local storage
-    const itemData = {
-        photo: itemPhoto.name,
-        name: itemName,
-        category: itemCategory,
-        quantity: itemQuantity,
-        expiration: itemExpiration,
-        location: itemLocation,
-        source: itemSource
+function showItemDetails(element) {
+    const itemDetailContent = document.getElementById('itemDetailContent');
+    const item = {
+        category: element.getAttribute('data-category'),
+        name: element.getAttribute('data-name'),
+        description: element.getAttribute('data-description'),
+        amount: element.getAttribute('data-amount'),
+        location: element.getAttribute('data-location'),
+        expiry: element.getAttribute('data-expiry'),
+        expiryImage: element.getAttribute('data-expiry-image'),
+        imageSrc: element.querySelector('img').src
     };
-    localStorage.setItem('itemData', JSON.stringify(itemData));
+    itemDetailContent.innerHTML = `
+        <img src="${item.imageSrc}" alt="${item.name}" style="width:100%; border-radius: 10px;">
+        <h3>${item.name}</h3>
+        <p><strong>Description:</strong> ${item.description}</p>
+        <p><strong>Amount:</strong> ${item.amount}</p>
+        <p><strong>Location:</strong> ${item.location}</p>
+        ${item.expiry ? `<p><strong>Expiry Date:</strong> ${item.expiry}</p>` : ''}
+        ${item.expiryImage ? `<img src="${item.expiryImage}" alt="Expiry Date" style="width: 100%; border-radius: 10px;">` : ''}
+        <button onclick="addToCart('${item.name}', '${item.category}', '${item.imageSrc}')">Get/Buy</button>
+    `;
+    document.getElementById('itemDetailModal').style.display = 'block';
+}
 
-    // Close modal after submission (optional)
+function closeItemDetailModal() {
+    document.getElementById('itemDetailModal').style.display = 'none';
+}
+
+function addToCart(name, category, imageSrc) {
+    cart.push({ name, category, imageSrc });
+    alert(`${name} added to cart.`);
+    closeItemDetailModal();
+}
+
+function openCart() {
+    const cartItemsContainer = document.getElementById('cartItems');
+    cartItemsContainer.innerHTML = '';
+    cart.forEach(item => {
+        const cartItemElement = document.createElement('div');
+        cartItemElement.innerHTML = `
+            <p><strong>${item.name}</strong></p>
+            <img src="${item.imageSrc}" alt="${item.name}" style="width: 50px; height: 50px; border-radius: 5px;">
+        `;
+        cartItemsContainer.appendChild(cartItemElement);
+    });
+    document.getElementById('cartModal').style.display = 'block';
+}
+
+function closeCart() {
+    document.getElementById('cartModal').style.display = 'none';
+}
+
+function checkout() {
+    alert('Proceeding to checkout...');
+    // Implement checkout logic
+    cart = [];
+    closeCart();
+}
+
+function addItemToCategory(item) {
+    const categoryElement = document.getElementById(item.category).querySelector('.items');
+    const newItemElement = document.createElement('div');
+    newItemElement.className = 'item';
+    newItemElement.onclick = () => showItemDetails(newItemElement);
+    newItemElement.setAttribute('data-category', item.category);
+    newItemElement.setAttribute('data-name', item.name);
+    newItemElement.setAttribute('data-description', item.description);
+    newItemElement.setAttribute('data-amount', item.amount);
+    newItemElement.setAttribute('data-location', item.location);
+    newItemElement.setAttribute('data-expiry', item.expiry);
+    newItemElement.setAttribute('data-expiry-image', item.expiryImage);
+    newItemElement.innerHTML = `
+        <img src="${URL.createObjectURL(item.image)}" alt="${item.name}">
+        <p><strong>${item.name}</strong></p>
+        <p>${item.amount}</p>
+    `;
+    categoryElement.appendChild(newItemElement);
+}
+
+document.getElementById('addItemForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const newItem = {
+        category: formData.get('itemCategory'),
+        image: formData.get('itemImage'),
+        name: formData.get('itemName'),
+        amount: formData.get('itemAmount'),
+        recipient: formData.get('itemRecipient'),
+        recipientName: formData.get('recipientName'),
+        type: formData.get('itemType'),
+        description: formData.get('itemDescription'),
+        location: formData.get('itemLocation'),
+        expiry: formData.get('itemExpiry'),
+        expiryImage: formData.get('expiryImage')
+    };
+    addItemToCategory(newItem);
     closeModal();
+    event.target.reset();
+});
 
-    // Redirect to home page or perform necessary actions
-    window.location.href = 'home-page.html';
-}
-
-// Function to open settings page
-function openSettings() {
-    // Implement functionality to open settings page (check-profile.html)
-    // Example: window.location.href = 'check-profile.html';
-}
-
-// Function to handle item purchase
-function purchaseItem() {
-    // Implement purchase logic (e.g., remove item from display)
-    // You may remove the item from the DOM or mark it as sold
-
-    // Show confirmation modal
-    document.getElementById('confirmationModal').style.display = 'block';
-
-    // Optionally: Notify donor via backend or email
-    notifyDonor();
-}
-
-// Function to close confirmation modal
-function closeConfirmationModal() {
-    document.getElementById('confirmationModal').style.display = 'none';
-}
-
-// Function to confirm receipt of item
-function confirmReceived() {
-    // Implement logic to mark item as received or remove from display
-    // Here, simulate removing item from DOM
-    document.querySelector('.item').style.display = 'none';
-
-    // Optionally: Implement rating functionality
-    rateDonor();
-
-    // Close confirmation modal
-    closeConfirmationModal();
-}
-
-// Function to notify donor (placeholder for backend or email notification)
-function notifyDonor() {
-    // Implement notification logic here (e.g., backend API call, email sending)
-    // Placeholder for demonstration
-    console.log('Notification sent to donor');
-}
-
-// Function to rate donor (placeholder)
-function rateDonor() {
-    // Implement rating functionality here (e.g., display rating form)
-    // Placeholder for demonstration
-    const rating = prompt('Rate the donor (1-5 stars):');
-    if (rating) {
-        alert(`Thank you for rating ${rating} stars!`);
-        // Optionally: Store rating in backend or local storage
+window.onclick = function(event) {
+    const addItemModal = document.getElementById('addItemModal');
+    const itemDetailModal = document.getElementById('itemDetailModal');
+    const cartModal = document.getElementById('cartModal');
+    if (event.target === addItemModal) {
+        closeModal();
+    } else if (event.target === itemDetailModal) {
+        closeItemDetailModal();
+    } else if (event.target === cartModal) {
+        closeCart();
     }
+
+};
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    const hour = new Date().getHours();
+    const isDayTime = hour >= 6 && hour < 18; // Assume day time from 6 AM to 6 PM
+
+    if (isDayTime) {
+        document.body.classList.add("day");
+    } else {
+        document.body.classList.add("night");
+    }
+});
+
+
+
+
+
+
+
+
+
+//menu
+function toggleMenu() {
+    const menu = document.getElementById('responsiveMenu');
+    menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
 }
+
+//search
+document.getElementById('searchButton').addEventListener('click', function() {
+    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+    const allItems = document.querySelectorAll('.item');
+
+    allItems.forEach(item => {
+        const itemName = item.getAttribute('data-name').toLowerCase();
+        const itemDescription = item.getAttribute('data-description').toLowerCase();
+        const itemLocation = item.getAttribute('data-location').toLowerCase();
+
+        if (itemName.includes(searchTerm) || itemDescription.includes(searchTerm) || itemLocation.includes(searchTerm)) {
+            item.style.display = 'block';
+        } else {
+            item.style.display = 'none';
+        }
+    });
+});
+

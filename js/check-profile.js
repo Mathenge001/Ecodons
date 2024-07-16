@@ -1,46 +1,51 @@
-// Function to submit individual form
-function submitIndividualForm() {
-    // Get form data
-    let formData = {
-        accountType: 'individual',
-        individualName: document.getElementById('individualName').value,
-        individualEmail: document.getElementById('individualEmail').value,
-        individualPhone: document.getElementById('individualPhone').value,
-        individualCountry: document.getElementById('individualCountry').value,
-        individualCounty: document.getElementById('individualCounty').value,
-        individualArea: document.getElementById('individualArea').value,
-        individualGender: document.getElementById('individualGender').value,
-        individualPhoto: document.getElementById('individualPhoto').value,
-        individualBio: document.getElementById('individualBio').value
+document.addEventListener("DOMContentLoaded", () => {
+    const profileData = JSON.parse(localStorage.getItem("profile"));
+    if (profileData) {
+        document.getElementById("profileName").value = profileData.name;
+        document.getElementById("profileEmail").value = profileData.email;
+        document.getElementById("profilePhone").value = profileData.phone;
+        document.getElementById("profileCountry").value = profileData.country;
+        document.getElementById("profileCounty").value = profileData.county;
+        document.getElementById("profileArea").value = profileData.area;
+        document.getElementById("profileGender").value = profileData.gender;
+        document.getElementById("profileBio").value = profileData.bio;
+    }
+});
+
+function updateProfile() {
+    const name = document.getElementById("profileName").value;
+    const email = document.getElementById("profileEmail").value;
+    const phone = document.getElementById("profilePhone").value;
+    const country = document.getElementById("profileCountry").value;
+    const county = document.getElementById("profileCounty").value;
+    const area = document.getElementById("profileArea").value;
+    const gender = document.getElementById("profileGender").value;
+    const photoInput = document.getElementById("profilePhoto");
+    const bio = document.getElementById("profileBio").value;
+
+    const profileData = {
+        name,
+        email,
+        phone,
+        country,
+        county,
+        area,
+        gender,
+        bio
     };
 
-    // Store form data in local storage
-    localStorage.setItem('formData', JSON.stringify(formData));
-
-    // Redirect to home page
-    window.location.href = 'home-page.html';
-}
-
-// Function to submit organization form
-function submitOrganizationForm() {
-    // Get form data
-    let formData = {
-        accountType: 'organization',
-        organizationType: document.getElementById('organizationType').value,
-        organizationOtherType: document.getElementById('organizationOtherType').value,
-        organizationName: document.getElementById('organizationName').value,
-        organizationEmail: document.getElementById('organizationEmail').value,
-        organizationPhone: document.getElementById('organizationPhone').value,
-        organizationCountry: document.getElementById('organizationCountry').value,
-        organizationCounty: document.getElementById('organizationCounty').value,
-        organizationArea: document.getElementById('organizationArea').value,
-        organizationPhoto: document.getElementById('organizationPhoto').value,
-        organizationBio: document.getElementById('organizationBio').value
-    };
-
-    // Store form data in local storage
-    localStorage.setItem('formData', JSON.stringify(formData));
-
-    // Redirect to home page
-    window.location.href = 'home-page.html';
+    if (photoInput.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            profileData.photo = e.target.result;
+            localStorage.setItem("profile", JSON.stringify(profileData));
+            window.location.href = "home-page.html";
+        };
+        reader.readAsDataURL(photoInput.files[0]);
+    } else {
+        const existingData = JSON.parse(localStorage.getItem("profile"));
+        profileData.photo = existingData.photo;
+        localStorage.setItem("profile", JSON.stringify(profileData));
+        window.location.href = "home-page.html";
+    }
 }

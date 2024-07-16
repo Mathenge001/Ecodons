@@ -1,10 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Profile</title>
+    <link rel="stylesheet" href="css/check-profile.css">
 </head>
 <body>
+    <div class="container">
+        <h1>Profile</h1>
+        <form id="profileForm">
+            <label for="profileName">Name:</label>
+            <input type="text" id="profileName" name="name" required>
 
+            <label for="profileEmail">Email:</label>
+            <input type="email" id="profileEmail" name="email" required>
+
+            <label for="profilePhone">Phone:</label>
+            <input type="tel" id="profilePhone" name="phone" required>
+
+            <label for="profileCountry">Country:</label>
+            <input type="text" id="profileCountry" name="country" required>
+
+            <label for="profileCounty">County:</label>
+            <input type="text" id="profileCounty" name="county" required>
+
+            <label for="profileArea">Area:</label>
+            <input type="text" id="profileArea" name="area" required>
+
+            <label for="profileGender">Gender:</label>
+            <select id="profileGender" name="gender" required>
+                <option value="">Select...</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="non-binary">Non-binary</option>
+                <option value="other">Other</option>
+            </select>
+
+            <label for="profilePhoto">Profile Photo:</label>
+            <input type="file" id="profilePhoto" name="photo" accept="image/*">
+
+            <label for="profileBio">Bio:</label>
+            <textarea id="profileBio" name="bio" required></textarea>
+
+            <button type="button" onclick="updateProfile()">Save</button>
+        </form>
+    </div>
+
+    <script src="js/check-profile.js"></script>
 </body>
 </html>
