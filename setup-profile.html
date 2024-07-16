@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account</title>
+    <link rel="stylesheet" href="css/setup-profile.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Create Account</h1>
+        <p>Join us in making a difference by helping others and caring for the environment!</p>
+        <form id="accountTypeForm">
+            <label for="accountType">Account Type:</label>
+            <select id="accountType" name="accountType" required>
+                <option value="">Select...</option>
+                <option value="individual">Individual</option>
+                <option value="organization">Organization</option>
+            </select>
+        </form>
+        <form id="individualForm" class="account-form" style="display: none;">
+            <h2>Individual Account</h2>
+            <label for="individualName">Full Name:</label>
+            <input type="text" id="individualName" name="individualName" placeholder="Enter your full name" required>
+
+            <label for="individualEmail">Email:</label>
+            <input type="email" id="individualEmail" name="individualEmail" placeholder="Enter your email" required>
+
+            <label for="individualPhone">Phone Number:</label>
+            <input type="tel" id="individualPhone" name="individualPhone" placeholder="Enter your phone number" required>
+
+            <label for="individualCountry">Country:</label>
+            <input type="text" id="individualCountry" name="individualCountry" placeholder="Enter your country" required>
+
+            <label for="individualCounty">County:</label>
+            <input type="text" id="individualCounty" name="individualCounty" placeholder="Enter your county" required>
+
+            <label for="individualArea">Area/Estate:</label>
+            <input type="text" id="individualArea" name="individualArea" placeholder="Enter your area" required>
+
+            <label for="individualGender">Gender:</label>
+            <select id="individualGender" name="individualGender" required>
+                <option value="">Select...</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="non-binary">Non-binary</option>
+                <option value="other">Other</option>
+            </select>
+
+            <label for="individualPhoto">Profile Photo:</label>
+            <input type="file" id="individualPhoto" name="individualPhoto" accept="image/*" required>
+
+            <label for="individualBio">Bio:</label>
+            <textarea id="individualBio" name="individualBio" placeholder="Tell us something about yourself" required></textarea>
+
+            <button type="button" onclick="submitIndividualForm()">Submit</button>
+        </form>
+
+        <form id="organizationForm" class="account-form" style="display: none;">
+            <h2>Organization Account</h2>
+            <label for="organizationType">Type of Organization:</label>
+            <select id="organizationType" name="organizationType" required>
+                <option value="">Select...</option>
+                <option value="church">Church</option>
+                <option value="prison">Prison</option>
+                <option value="orphanage">Orphanage</option>
+                <option value="company">Company</option>
+                <option value="other">Other</option>
+            </select>
+            <label for="organizationOtherType" style="display: none;">Other Organization Type:</label>
+            <input type="text" id="organizationOtherType" name="organizationOtherType" style="display: none;" placeholder="Specify organization type">
+
+            <label for="organizationName">Organization Name:</label>
+            <input type="text" id="organizationName" name="organizationName" placeholder="Enter organization name" required>
+
+            <label for="organizationEmail">Email:</label>
+            <input type="email" id="organizationEmail" name="organizationEmail" placeholder="Enter email" required>
+
+            <label for="organizationPhone">Phone Number:</label>
+            <input type="tel" id="organizationPhone" name="organizationPhone" placeholder="Enter phone number" required>
+
+            <label for="organizationCountry">Country:</label>
+            <input type="text" id="organizationCountry" name="organizationCountry" placeholder="Enter country" required>
+
+            <label for="organizationCounty">County:</label>
+            <input type="text" id="organizationCounty" name="organizationCounty" placeholder="Enter county" required>
+
+            <label for="organizationArea">Area:</label>
+            <input type="text" id="organizationArea" name="organizationArea" placeholder="Enter area" required>
+
+            <label for="organizationPhoto">Profile Photo:</label>
+            <input type="file" id="organizationPhoto" name="organizationPhoto" accept="image/*" required>
+
+            <label for="organizationBio">Bio:</label>
+            <textarea id="organizationBio" name="organizationBio" placeholder="Tell us something about your organization" required></textarea>
+
+            <button type="button" onclick="submitOrganizationForm()">Submit</button>
+        </form>
+    </div>
+
+    <script src="js/setup-profile.js"></script>
+</body>
+</html>

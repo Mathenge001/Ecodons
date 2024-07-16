@@ -1,10 +1,122 @@
+<!-- Home Page Structure -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoDon - Home</title>
+    <link rel="stylesheet" href="css/home-page.css">
 </head>
 <body>
+    <div class="header">
+        <h1>EcoDon</h1>
+        <button onclick="openModal()">+</button>
+        <button onclick="opentab('products')">Products</button>
+        <button onclick="opentab('chats')">Chats</button>
+        <button onclick="opentab('newsfeed')">Newsfeed</button>
+        <button onclick="opentab('statistics')">Statistics</button>
+        <div class="profile" onclick="openSettings()">
+            <img id="profileImage" src="profile-pic.jpg" alt="Profile Picture">
+            <span id="profileName">John Doe</span>
+        </div>
+    </div>
 
+    <div class="taskbar">
+        <button onclick="scrollToCategory('clothes')">Clothes</button>
+        <button onclick="scrollToCategory('food')">Food</button>
+        <button onclick="scrollToCategory('books')">Books/Stationary</button>
+        <button onclick="scrollToCategory('recyclables')">Recyclables</button>
+        <button onclick="scrollToCategory('personal')">Personal Effects</button>
+        <button onclick="scrollToCategory('agric')">Agric Waste</button>
+    </div>
+
+    <div id="itemList">
+        <!-- Items will be dynamically added here -->
+      <!-- Sample item display structure -->
+<div class="item">
+    <img src="item-photo.jpg" alt="Item Photo">
+    <h3>Item Name</h3>
+    <p>Category: Clothes</p>
+    <p>Quantity: 5 pieces</p>
+    <p>Expiration Date: 2024-08-31</p>
+    <p>Location: Nairobi, Kahawa Wendani</p>
+    <p>Source: Donated by John Doe</p>
+    <button onclick="purchaseItem()">Purchase</button>
+</div>
+
+<!-- Confirmation modal for item purchase -->
+<div id="confirmationModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeConfirmationModal()">&times;</span>
+        <p>Did you receive the product?</p>
+        <button onclick="confirmReceived()">Yes</button>
+        <button onclick="closeConfirmationModal()">No</button>
+    </div>
+</div>
+
+    </div>
+
+    <!-- Modal for adding items -->
+    <div id="addItemModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <form id="addItemForm">
+                <label for="itemPhoto">Photo:</label>
+                <input type="file" id="itemPhoto" name="itemPhoto" accept="image/*" required>
+
+                <label for="itemName">Item Name:</label>
+                <input type="text" id="itemName" name="itemName" placeholder="Enter item name" required>
+
+                <label for="itemCategory">Category:</label>
+                <select id="itemCategory" name="itemCategory" required>
+                    <option value="">Select...</option>
+                    <option value="clothes">Clothes</option>
+                    <option value="food">Food</option>
+                    <option value="books">Books/Stationary</option>
+                    <option value="recyclables">Recyclables</option>
+                    <option value="personal">Personal Effects</option>
+                    <option value="agric">Agric Waste</option>
+                </select>
+
+                <label for="itemQuantity">Quantity:</label>
+                <input type="text" id="itemQuantity" name="itemQuantity" placeholder="Enter quantity" required>
+
+                <label for="itemExpiration">Expiration Date:</label>
+                <input type="date" id="itemExpiration" name="itemExpiration">
+
+                <label for="itemLocation">Location:</label>
+                <input type="text" id="itemLocation" name="itemLocation" placeholder="Enter location" required>
+
+                <label for="itemSource">Source:</label>
+                <input type="text" id="itemSource" name="itemSource" placeholder="Enter source details" required>
+
+                <button type="button" onclick="submitItem()">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- View Item Modal -->
+    <div id="viewItemModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeViewModal()">&times;</span>
+            <div id="itemDetails">
+                <!-- Item details will be dynamically added here -->
+            </div>
+            <button onclick="markAsPurchased()">Did you get the product?</button>
+            <div id="ratingSection" style="display: none;">
+                <h3>Rate the Service</h3>
+                <select id="rating" name="rating">
+                    <option value="1">1 - Poor</option>
+                    <option value="2">2 - Fair</option>
+                    <option value="3">3 - Good</option>
+                    <option value="4">4 - Very Good</option>
+                    <option value="5">5 - Excellent</option>
+                </select>
+                <button onclick="submitRating()">Submit Rating</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/home-page.js"></script>
 </body>
 </html>

@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
         event.preventDefault();
         // Add sign-up logic here
         alert('Sign up successful!');
-        window.location.href = 'create-account.html';
+        window.location.href = 'setup-profile.html';
     });
 
 
