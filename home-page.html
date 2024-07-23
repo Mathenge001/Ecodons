@@ -8,61 +8,212 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
-    <div class="header">
+<div class="header morning-gradient">
+    <div class="header-top">
         <h1>EcoDon</h1>
-        <div class="search-container">
-            <input type="text" id="searchInput" placeholder="Search...">
-            <button id="searchButton">Search</button>
-        </div>
-        <button onclick="openModal()">+</button>
         <button class="menu-icon" onclick="toggleMenu()">&#9776;</button>
-
-        <!-- Responsive navigation menu -->
-        <div class="responsive-menu" id="responsiveMenu">
-            <button class="close-menu" onclick="toggleMenu()">&times;</button>
-            <button class="menu-option">Products</button>
-            <button class="menu-option">Chats</button>
-            <button class="menu-option">Newsfeed</button>
-            <button class="menu-option">Statistics</button>
-        </div>
-
+        <button onclick="openModal()">+</button>
         <div class="profile" onclick="openSettings()">
             <img id="profileImage" src="default-profile-pic.jpg" alt="Profile Picture">
-            <span id="profileName">User</span>
-            <span class="settings-icon" onclick="openSettings()">&#9881;</span>
         </div>
     </div>
 
-    <div class="taskbar">
-        <button onclick="scrollToCategory('clothes')">Clothes</button>
-        <button onclick="scrollToCategory('food')">Food</button>
-        <button onclick="scrollToCategory('books')">Books/Stationary</button>
-        <button onclick="scrollToCategory('recyclables')">Recyclables</button>
-        <button onclick="scrollToCategory('personal')">Personal Effects</button>
-        <button onclick="scrollToCategory('agric')">Agric Waste</button>
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Search...">
+
     </div>
 
-    <div class="content">
+    <!-- Responsive navigation menu -->
+    <div class="responsive-menu" id="responsiveMenu">
+        <button class="close-menu" onclick="toggleMenu()">&times;</button>
+        <a href="home-page.html" class="menu-option">Products</a>
+        <a href="chats.html" class="menu-option">Chats</a>
+        <a href="newsfeed.html" class="menu-option">Newsfeed</a>
+        <a href="statistics.html" class="menu-option">Statistics</a>
+    </div>
+</div>
+
+<div class="taskbar morning-gradient">
+    <button onclick="scrollToCategory('clothes')">Clothes</button>
+    <button onclick="scrollToCategory('food')">Food</button>
+    <button onclick="scrollToCategory('stationary')">Stationary</button>
+    <button onclick="scrollToCategory('recyclables')">Recyclables</button>
+    <button onclick="scrollToCategory('personal')">Personal Effects</button>
+    <button onclick="scrollToCategory('agric')">Agric Waste</button>
+</div>
+
+
+
+    <div class="content morning-gradient">
+       <!-- clothes -->
         <div class="category" id="clothes">
-            <h2>Clothes</h2>
-            <div class="items">
-                <div class="item" onclick="showItemDetails(this)" data-category="clothes" data-name="T-shirt" data-description="A comfortable cotton t-shirt" data-amount="10" data-location="Naka, Nakuru" data-expiry="" data-expiry-image="">
-                    <img src="https://i.pinimg.com/564x/07/cb/3b/07cb3b8413acfa7a02dd68deea528a11.jpg" alt="T-shirt">
-                    <p><strong>T-shirt</strong></p>
-                    <p>10 pcs</p>
-                </div>
-            </div>
+    <h2>Clothes</h2>
+    <input type="text" class="category-search" placeholder="Search by name, amount, or location" oninput="filterItems('clothes')">
+    <div class="items" id="clothesItems">
+        <div class="item" onclick="showItemDetails(this)" data-category="clothes" data-name="T-shirt" data-description="A comfortable cotton t-shirt" data-amount="10" data-location="Naka, Nakuru" data-expiry="">
+            <img src="https://i.pinimg.com/564x/07/cb/3b/07cb3b8413acfa7a02dd68deea528a11.jpg" alt="T-shirt">
+            <p><strong>T-shirt</strong></p>
+            <p>10 pcs</p>
         </div>
-        <!-- Repeat the structure for other categories... -->
+        <div class="item" onclick="showItemDetails(this)" data-category="clothes" data-name="Jeans" data-description="Stylish blue jeans" data-amount="5" data-location="Kahawa Wendani" data-expiry="">
+            <img src="https://i.pinimg.com/736x/28/6e/08/286e08b73384395960cd6d6129659826.jpg" alt="Jeans">
+            <p><strong>Jeans</strong></p>
+            <p>5 pcs</p>
+        </div>
+        <!-- Add more items here -->
+
+    </div>
+</div>
+
+
+        <!-- food -->
+        <div class="category" id="food">
+    <h2>Food</h2>
+    <input type="text" class="category-search" placeholder="Search by name, amount, or location" oninput="filterItems('clothes')">
+    <div class="items" id="foodItems">
+        <div class="item" onclick="showItemDetails(this)" data-category="clothes" data-name="T-shirt" data-description="A comfortable cotton t-shirt" data-amount="10" data-location="Naka, Nakuru" data-expiry="">
+            <img src="https://i.pinimg.com/564x/93/16/ea/9316eaa14a83183b711cf79e2da79825.jpg" alt="Rice">
+            <p><strong>Rice</strong></p>
+            <p>5kg</p>
+        </div>
+        <div class="item" onclick="showItemDetails(this)" data-category="clothes" data-name="Jeans" data-description="Stylish blue jeans" data-amount="5" data-location="Kahawa Wendani" data-expiry="">
+            <img src="https://i.pinimg.com/564x/ab/5d/b7/ab5db7ff7e84d755dba0ffcc943d646f.jpg" alt="Spaggheti">
+            <p><strong>spagghetti</strong></p>
+            <p>5 pkts</p>
+        </div>
+    </div>
+ <!-- Add more items here -->
+        </div>
+
+            <!-- Books/Stationary -->
+        <div class="category" id="stationary">
+    <h2>Stationary</h2>
+    <input type="text" class="category-search" placeholder="Search by name, amount, or location" oninput="filterItems('clothes')">
+    <div class="items" id="stationaryItems">
+        <div class="item" onclick="showItemDetails(this)" data-category="clothes" data-name="T-shirt" data-description="A comfortable cotton t-shirt" data-amount="10" data-location="Naka, Nakuru" data-expiry="">
+            <img src="https://i.pinimg.com/564x/10/50/64/105064dd4b067f84fb1839c98bc0ba1b.jpg" alt="Pencils">
+            <p><strong>pencils</strong></p>
+            <p>6 pencils</p>
+        </div>
+        <div class="item" onclick="showItemDetails(this)" data-category="clothes" data-name="Jeans" data-description="Stylish blue jeans" data-amount="5" data-location="Kahawa Wendani" data-expiry="">
+            <img src="https://i.pinimg.com/564x/12/50/0a/12500a174a13b283e4e9c6b1e0a73800.jpg" alt="Notebook">
+            <p><strong>Note book</strong></p>
+            <p>1 book</p>
+        </div>
+    </div>
+ <!-- Add more items here -->
+        </div>
+
+
+           <!-- Recyclables -->
+        <div class="category" id="recyclables">
+    <h2>Recyclables</h2>
+    <input type="text" class="category-search" placeholder="Search by name, amount, or location" oninput="filterItems('clothes')">
+    <div class="items" id="recyclablesItems">
+        <div class="item" onclick="showItemDetails(this)" data-category="clothes" data-name="T-shirt" data-description="A comfortable cotton t-shirt" data-amount="10" data-location="Naka, Nakuru" data-expiry="">
+            <img src="https://i.pinimg.com/564x/63/0e/cb/630ecbc3646260d7298a3b1a30ea968b.jpg" alt="Pencils">
+            <p><strong>Soda cans</strong></p>
+            <p>16 cans</p>
+        </div>
+        <div class="item" onclick="showItemDetails(this)" data-category="clothes" data-name="Jeans" data-description="Stylish blue jeans" data-amount="5" data-location="Kahawa Wendani" data-expiry="">
+            <img src="https://i.pinimg.com/564x/3e/ff/7d/3eff7d960c42b9b502d184b4c2ecec77.jpg" alt="Notebook">
+            <p><strong>Plastic water bottles</strong></p>
+            <p>20 bottles</p>
+        </div>
+    </div>
+ <!-- Add more items here -->
+        </div>
+
+
+
+       <!-- Personal effects -->
+        <div class="category" id="personal">
+    <h2>Personal effects</h2>
+    <input type="text" class="category-search" placeholder="Search by name, amount, or location" oninput="filterItems('clothes')">
+    <div class="items" id="personalItems">
+        <div class="item" onclick="showItemDetails(this)" data-category="clothes" data-name="T-shirt" data-description="A comfortable cotton t-shirt" data-amount="10" data-location="Naka, Nakuru" data-expiry="">
+            <img src="https://i.pinimg.com/564x/ac/44/3c/ac443c6ea8e8e93d769d3cc0cf335c6a.jpg" alt="Pencils">
+            <p><strong>Sanitary Towels</strong></p>
+            <p>2 pkts</p>
+        </div>
+        <div class="item" onclick="showItemDetails(this)" data-category="clothes" data-name="Jeans" data-description="Stylish blue jeans" data-amount="5" data-location="Kahawa Wendani" data-expiry="">
+            <img src="https://i.pinimg.com/564x/2d/7a/9a/2d7a9a28df5d6c9a658d9bdb087eed90.jpg" alt="Notebook">
+            <p><strong>Dettol</strong></p>
+            <p>1 bottle</p>
+        </div>
+    </div>
+ <!-- Add more items here -->
+        </div>
+
+       <!-- Agric waste -->
+        <div class="category" id="agric">
+    <h2>Agric waste</h2>
+    <input type="text" class="category-search" placeholder="Search by name, amount, or location" oninput="filterItems('clothes')">
+    <div class="items" id="agricItems">
+        <div class="item" onclick="showItemDetails(this)" data-category="clothes" data-name="T-shirt" data-description="A comfortable cotton t-shirt" data-amount="10" data-location="Naka, Nakuru" data-expiry="">
+            <img src="https://i.pinimg.com/564x/47/fb/10/47fb10f1a02961ace30751800c47a143.jpg" alt="Pencils">
+            <p><strong>Potato peels</strong></p>
+            <p>2 kg</p>
+        </div>
+        <div class="item" onclick="showItemDetails(this)" data-category="clothes" data-name="Jeans" data-description="Stylish blue jeans" data-amount="5" data-location="Kahawa Wendani" data-expiry="">
+            <img src="https://i.pinimg.com/564x/17/cf/0d/17cf0ddb8915b3cbbbba77678cee0aaa.jpg" alt="Notebook">
+            <p><strong>Kitchen refuse</strong></p>
+            <p>12 kg</p>
+        </div>
+    </div>
+ <!-- Add more items here -->
+        </div>
+
+
+
+
+
+          <!-- more categories -->
+
     </div>
 
-    <!-- Add Item Modal -->
+       <!-- Add Item Modal -->
     <div id="addItemModal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
             <h2>Add New Item</h2>
             <form id="addItemForm">
-                <!-- Form fields... -->
+                <label for="itemCategory">Category:</label>
+                <select id="itemCategory" name="itemCategory" required>
+                    <option value="clothes">Clothes</option>
+                    <option value="food">Food</option>
+                    <option value="books">Books/Stationary</option>
+                    <option value="recyclables">Recyclables</option>
+                    <option value="personal">Personal Effects</option>
+                    <option value="agric">Agric Waste</option>
+                </select>
+                <label for="itemImage">Image:</label>
+                <input type="file" id="itemImage" name="itemImage" accept="image/*" required>
+                <label for="itemName">Name:</label>
+                <input type="text" id="itemName" name="itemName" required>
+                <label for="itemAmount">Amount:</label>
+                <input type="number" id="itemAmount" name="itemAmount" required>
+                <label for="itemRecipient">Recipient:</label>
+                <select id="itemRecipient" name="itemRecipient" required>
+                    <option value="organization">Organization</option>
+                    <option value="individual">Individual</option>
+                    <option value="upForGrabs">Up for Grabs</option>
+                </select>
+                <label for="recipientName">Recipient Name:</label>
+                <input type="text" id="recipientName" name="recipientName">
+                <label for="itemType">Type:</label>
+                <select id="itemType" name="itemType" required>
+                    <option value="donate">Donate</option>
+                    <option value="sell">Sell</option>
+                </select>
+                <label for="itemDescription">Description:</label>
+                <textarea id="itemDescription" name="itemDescription" rows="4" required></textarea>
+                <label for="itemLocation">Location:</label>
+                <input type="text" id="itemLocation" name="itemLocation" required>
+                <label for="itemExpiry">Expiry Date:</label>
+                <input type="date" id="itemExpiry" name="itemExpiry">
+                <label for="expiryImage">Expiry Date Image:</label>
+                <input type="file" id="expiryImage" name="expiryImage" accept="image/*">
                 <button type="submit">Add Item</button>
             </form>
         </div>
@@ -89,5 +240,36 @@
     </div>
 
     <script src="js/home-page.js"></script>
+<script>
+    function applyGradientBasedOnTime() {
+        const now = new Date();
+        const hour = now.getHours();
+        let gradientClass;
+
+        if (hour >= 6 && hour < 12) {
+            // Morning
+            gradientClass = 'morning-gradient';
+        } else if (hour >= 12 && hour < 18) {
+            // Noon
+            gradientClass = 'noon-gradient';
+        } else if (hour >= 18 && hour < 21) {
+            // Evening
+            gradientClass = 'evening-gradient';
+        } else {
+            // Night
+            gradientClass = 'night-gradient';
+        }
+
+        document.querySelector('.header').classList.add(gradientClass);
+        document.querySelector('.taskbar').classList.add(gradientClass);
+        document.querySelector('.content').classList.add(gradientClass);
+        document.querySelectorAll('.category h2').forEach(element => {
+            element.classList.add(gradientClass);
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', applyGradientBasedOnTime);
+</script>
+
 </body>
 </html>

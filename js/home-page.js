@@ -1,3 +1,6 @@
+
+
+//responsible for updating profile and name from set up
 document.addEventListener("DOMContentLoaded", () => {
     const profileData = JSON.parse(localStorage.getItem("profile"));
     if (profileData) {
@@ -6,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
+//for opening settings when profile is tapped
 function openSettings() {
     window.location.href = "check-profile.html";
 }
@@ -87,6 +91,8 @@ function checkout() {
     closeCart();
 }
 
+
+//add item form
 function addItemToCategory(item) {
     const categoryElement = document.getElementById(item.category).querySelector('.items');
     const newItemElement = document.createElement('div');
@@ -106,6 +112,7 @@ function addItemToCategory(item) {
     `;
     categoryElement.appendChild(newItemElement);
 }
+
 
 document.getElementById('addItemForm').addEventListener('submit', function(event) {
     event.preventDefault();
@@ -128,6 +135,8 @@ document.getElementById('addItemForm').addEventListener('submit', function(event
     event.target.reset();
 });
 
+
+//opening modals
 window.onclick = function(event) {
     const addItemModal = document.getElementById('addItemModal');
     const itemDetailModal = document.getElementById('itemDetailModal');
@@ -186,3 +195,25 @@ document.getElementById('searchButton').addEventListener('click', function() {
     });
 });
 
+
+//category search
+function filterItems(category) {
+    const searchInput = document.querySelector(`#${category} .category-search`);
+    const filter = searchInput.value.toLowerCase();
+    const itemsContainer = document.getElementById(`${category}Items`);
+    const items = itemsContainer.getElementsByClassName('item');
+
+    // Loop through all items and hide those that don't match the search query
+    for (let i = 0; i < items.length; i++) {
+        const item = items[i];
+        const name = item.getAttribute('data-name').toLowerCase();
+        const amount = item.getAttribute('data-amount').toLowerCase();
+        const location = item.getAttribute('data-location').toLowerCase();
+
+        if (name.includes(filter) || amount.includes(filter) || location.includes(filter)) {
+            item.style.display = ''; // Show item
+        } else {
+            item.style.display = 'none'; // Hide item
+        }
+    }
+}

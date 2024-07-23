@@ -1,199 +1,331 @@
-        .body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
+/* General reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px;
-        }
+/* Gradient styles for different times of day */
+.morning-gradient {
+    background: linear-gradient(to right, #FFDEE9, #B5FFFC);
+}
 
-        .header h1 {
-            margin: 0;
+.noon-gradient {
+    background: linear-gradient(to right, #FFE53B, #FF2525);
+}
 
-        }
+.evening-gradient {
+    background: linear-gradient(to right, #FFB75E, #ED8F03);
+}
 
-        .header button {
-            background-color: #4CAF50;
-            border: none;
-            color: white;
-            padding: 10px;
-            cursor: pointer;
-        }
+.night-gradient {
+    background: linear-gradient(to right, #03193e, #03535d);
+}
 
-        .header .profile {
-            display: flex;
-            align-items: center;
-        }
+/* Header styles */
+.header {
+    color: white;
+    padding: 10px;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
 
-        .header .profile img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            margin-right: 10px;
-        }
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-        .taskbar {
-            display: flex;
-            justify-content: space-around;
-            background-color: #f1f1f1;
-            padding: 10px;
-        }
+.header h1 {
+    font-size: 24px;
+}
 
-        .taskbar button {
-            background-color: #4CAF50;
-            border: none;
-            color: white;
-            padding: 10px;
-            cursor: pointer;
-        }
+.search-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 6px;
+}
 
+#searchInput {
+    width: 80%;
+    padding: 8px;
+    border: none;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+}
 
-        .content {
-            padding: 130px 20px 20px;
-        }
+#searchButton {
+    padding: 8px;
+    background-color: #4d4d4d;
+    color: rgba(58, 58, 65, 0.68);
+    border: none;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+}
 
-        .category {
-            margin-bottom: 20px;
-        }
+#searchButton:hover {
+    background-color: #f1f1f1;
+}
 
-        .category h2 {
-            background-color: #ffd700;
-            padding: 10px;
-            border-radius: 5px;
-            margin: 0 0 10px;
-        }
+button.menu-icon {
+    background-color: inherit;
+    color: white;
+    border: none;
+    font-size: 24px;
+}
 
-        .items {
-            display: flex;
-            overflow-x: auto;
-            padding: 10px;
-            background-color: #fff;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
+button.menu-icon:hover {
+    color: #f1f1f1;
+}
 
-        .item {
-            min-width: 200px;
-            max-width: 200px;
-            background-color: #f9f9f9;
-            margin-right: 10px;
-            padding: 10px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            cursor: pointer;
-        }
+.responsive-menu {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    background-color: inherit;
+}
 
-        .item img {
-            width: 100%;
-            border-radius: 5px;
-        }
+.responsive-menu a.menu-option {
+    display: block;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    border-top: 1px solid #f1f1f1;
+    width: 100%;
+    cursor: pointer;
+    text-decoration: none; /* Remove underline */
+}
 
-        .item p {
-            margin: 10px 0 0;
-        }
+.responsive-menu a.menu-option:hover {
+    background-color: #45a049;
+}
 
-        /* Modal styles */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 10000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.4);
-        }
+.profile {
+    display: flex;
+    align-items: center;
+}
 
-        .modal-content {
-            background-color: rgba(8, 8, 236, 0.31);
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #eeeeee;
-            width: 80%;
-            max-width: 600px;
-            border-radius: 10px;
-        }
+.profile img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
 
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
+.settings-icon {
+    margin-left: 10px;
+    font-size: 20px;
+}
 
-        .close:hover,
-        .close:focus {
-            color: #000;
-            text-decoration: none;
-            cursor: pointer;
-        }
+/* Taskbar styles */
+.taskbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 5px;
+    position: fixed;
+    top: 90px; /* Adjust based on header height */
+    width: 100%;
+    z-index: 999;
+}
 
-        .modal label {
-            display: block;
-            margin-top: 10px;
-        }
+.taskbar button {
+    background-color: inherit;
+    color: white;
+    border: none;
+    padding: 5px;
+    margin: 3px;
+    border-radius: 5px;
+    cursor: pointer;
+    flex: 1 1 45%; /* Adjusted to make buttons smaller */
+    text-align: center;
+}
 
-        .modal input,
-        .modal select,
-        .modal textarea {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
+.taskbar button:hover {
+    background-color: #000000;
+}
 
-        .modal button {
-            padding: 10px 20px;
-            background-color: #1d3557;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-transform: uppercase;
-        }
+/* Responsive styles */
+@media (max-width: 600px) {
+    .header h1 {
+        font-size: 20px;
+    }
 
-        .modal button:hover {
-            background-color: #16304e;
-        }
+    .search-container {
+        width: 100%;
+        margin-top: -3px;
+    }
 
-        /* Item detail modal */
-        .item-detail-modal .modal-content {
-            margin: 10% auto;
-            padding: 20px;
-            max-width: 500px;
-        }
+    #searchInput {
+        width: 70%;
+        border-radius: 5px;
+    }
 
-        /* Cart styles */
-        .cart-button {
-            background-color: #1d3557;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            padding: 10px;
-            cursor: pointer;
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
-        }
+    #searchButton {
+        width: 10%;
+        border-radius: 5px;
+    }
 
+    .profile img {
+        width: 30px;
+        height: 30px;
+    }
 
+    .taskbar {
+        padding: 5px;
+        top: 66px; /* Adjust based on header height */
+    }
 
-        .cart-button:hover {
-            background-color: #16304e;
-        }
+    .taskbar button {
+        flex: 1 1 45%;
+        margin: 4px;
+        padding: 5px;
+    }
+}
 
+.content {
+    padding: 20px;
+    margin-top: 170px; /* Adjust based on header and taskbar height */
+}
 
+.category {
+    margin-bottom: 20px;
+}
 
+.category h2 {
+    padding: 10px;
+    border-radius: 5px;
+    margin: 0 0 10px;
+}
 
+.items {
+    display: flex;
+    overflow-x: auto;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.44);
+}
 
+.item {
+    min-width: 200px;
+    max-width: 200px;
+    background-color: #f9f9f9;
+    margin-right: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
 
+.item img {
+    width: 100%;
+    border-radius: 5px;
+}
+
+.item p {
+    margin: 10px 0 0;
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: rgba(255, 222, 0, 0.93);
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #eeeeee;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 10px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal label {
+    display: block;
+    margin-top: 10px;
+}
+
+.modal input,
+.modal select,
+.modal textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.modal button {
+    padding: 10px 20px;
+    background-color: #1d3557;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+.modal button:hover {
+    background-color: #16304e;
+}
+
+/* Item detail modal */
+.item-detail-modal .modal-content {
+    margin: 10% auto;
+    padding: 20px;
+    max-width: 500px;
+}
+
+/* Cart styles */
+.cart-button {
+    background-color: #1d3557;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.cart-button:hover {
+    background-color: #16304e;
+}
+
+.category-search {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
