@@ -1,10 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoDon Statistics</title>
+    <link rel="stylesheet" href="css/statistics.css">
+    <script src="js/statistics.js" defer></script>
 </head>
 <body>
-
+    <header>
+        <h1>EcoDon Statistics</h1>
+        <nav>
+            <a href="home-page.html" class="menu-option">Products</a>
+            <a href="chats.html" class="menu-option">Chats</a>
+            <a href="newsfeed.html" class="menu-option">Newsfeed</a>
+            <a href="statistics.html" class="menu-option">Statistics</a>
+        </nav>
+    </header>
+    <main>
+        <div class="tab-buttons">
+            <button class="tab-button active" data-tab="personalStats">Personal Stats</button>
+            <button class="tab-button" data-tab="globalStats">Global Stats</button>
+        </div>
+        <div id="personalStats" class="tab-content active">
+            <section>
+                <h2>Personal Impact</h2>
+                <div class="stat-card" id="hungerCard">
+                    <div class="circle">
+                        <svg>
+                            <circle id="hungerCircle" cx="50" cy="50" r="40"></circle>
+                        </svg>
+                        <span id="hungerCircleLabel">75%</span>
+                    </div>
+                    <h3>Impact on World Hunger</h3>
+                    <p>You've helped reduce world hunger by donating food equivalent to 750 meals.</p>
+                    <div class="dropdown">
+                        <button class="dropdown-btn">View History</button>
+                        <div class="dropdown-content">
+                            <p>Jan 2024: 50 meals</p>
+                            <p>Feb 2024: 100 meals</p>
+                            <p>Mar 2024: 200 meals</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-card" id="co2Card">
+                    <div class="circle">
+                        <svg>
+                            <circle id="co2Circle" cx="50" cy="50" r="40"></circle>
+                        </svg>
+                        <span id="co2CircleLabel">60%</span>
+                    </div>
+                    <h3>Impact on CO2 Levels</h3>
+                    <p>Your donations have offset 600 kg of CO2 emissions.</p>
+                    <div class="dropdown">
+                        <button class="dropdown-btn">View History</button>
+                        <div class="dropdown-content">
+                            <p>Jan 2024: 50 kg</p>
+                            <p>Feb 2024: 100 kg</p>
+                            <p>Mar 2024: 200 kg</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="stat-card" id="waterCard">
+                    <div class="circle">
+                        <svg>
+                            <circle id="waterCircle" cx="50" cy="50" r="40"></circle>
+                        </svg>
+                        <span id="waterCircleLabel">85%</span>
+                    </div>
+                    <h3>Impact on Water Usage</h3>
+                    <p>You've saved 850 liters of water through your donations.</p>
+                    <div class="dropdown">
+                        <button class="dropdown-btn">View History</button>
+                        <div class="dropdown-content">
+                            <p>Jan 2024: 100 liters</p>
+                            <p>Feb 2024: 150 liters</p>
+                            <p>Mar 2024: 200 liters</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="goal-setting">
+                    <h2>Set Your Donation Goal</h2>
+                    <form id="goalForm">
+                        <label for="goalAmount">Goal Amount (kg):</label>
+                        <input type="number" id="goalAmount" name="goalAmount" required>
+                        <button type="submit">Set Goal</button>
+                    </form>
+                    <p id="goalMessage"></p>
+                </div>
+            </section>
+        </div>
+        <div id="globalStats" class="tab-content">
+            <h2>Leaderboard</h2>
+            <div class="leaderboard-filters">
+                <label for="leaderboardCategory">Category:</label>
+                <select id="leaderboardCategory">
+                    <option value="hunger">World Hunger</option>
+                    <option value="co2">CO2 Levels</option>
+                    <option value="water">Water Usage</option>
+                </select>
+                <label for="leaderboardMetric">Metric:</label>
+                <select id="leaderboardMetric">
+                    <option value="weekly">Weekly</option>
+                    <option value="monthly">Monthly</option>
+                    <option value="annually">Annually</option>
+                </select>
+            </div>
+            <div id="leaderboard">
+                <!-- Leaderboard cards will be populated here by JavaScript -->
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 EcoDon. All rights reserved.</p>
+    </footer>
 </body>
 </html>

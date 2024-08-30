@@ -1,10 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoDon Chats</title>
+    <link rel="stylesheet" href="css/chats.css">
+    <script src="js/chats.js" defer></script>
 </head>
 <body>
+    <header>
+        <h1>EcoDon Chats</h1>
+        <nav>
+            <a href="home-page.html" class="menu-option">Products</a>
+            <a href="chats.html" class="menu-option">Chats</a>
+            <a href="newsfeed.html" class="menu-option">Newsfeed</a>
+            <a href="statistics.html" class="menu-option">Statistics</a>
+        </nav>
+    </header>
 
+    <!-- Chats List Section -->
+    <section id="chats-list-section">
+        <div class="chat-header">
+            <h2>Chats</h2>
+            <button id="new-group-btn">Create New Group</button>
+        </div>
+        <div id="chat-list">
+            <!-- Sample Chats -->
+            <div class="chat-item" onclick="openChat('Alice', 1)">
+                <img src="img/sample-avatar1.jpg" alt="Alice" class="chat-avatar">
+                <div class="chat-info">
+                    <h3>Alice</h3>
+                    <p>Hey, how are you?</p>
+                </div>
+            </div>
+            <div class="chat-item" onclick="openChat('Bob', 2)">
+                <img src="img/sample-avatar2.jpg" alt="Bob" class="chat-avatar">
+                <div class="chat-info">
+                    <h3>Bob</h3>
+                    <p>Let's meet tomorrow!</p>
+                </div>
+            </div>
+            <!-- More chats can be added here -->
+        </div>
+    </section>
+
+    <!-- Chat Window Section -->
+    <section id="chat-window">
+        <div class="chat-header">
+            <button id="back-btn">Back</button>
+            <h2 id="chat-with">Chat with</h2>
+            <div class="chat-actions">
+                <button id="attach-btn">Attach</button>
+                <button id="call-btn">Call</button>
+            </div>
+        </div>
+        <div id="messages">
+            <!-- Messages will be injected here -->
+        </div>
+        <div id="message-input">
+            <input type="text" id="message-box" placeholder="Type a message...">
+            <button id="send-btn">Send</button>
+            <!-- Hidden file input for attachments -->
+            <input type="file" id="file-input" style="display: none;" accept="image/*,video/*,audio/*">
+        </div>
+    </section>
+
+    <!-- Group Creation Modal -->
+    <div id="group-modal">
+        <div class="modal-content">
+            <span id="close-modal-btn">&times;</span>
+            <h2>Create Group</h2>
+            <form id="group-form">
+                <input type="text" id="group-name" placeholder="Group Name" required>
+                <textarea id="group-description" placeholder="Group Description"></textarea>
+                <div id="members-list">
+                    <!-- Members will be added here -->
+                </div>
+                <input type="text" id="add-member" placeholder="Add member by email">
+                <button type="button" id="add-member-btn">Add Member</button>
+                <button type="submit" id="create-group-btn">Create Group</button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

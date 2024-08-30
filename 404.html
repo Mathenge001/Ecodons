@@ -1,62 +1,225 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8">
-  <title>Page Not Found</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eco-Catch Game - 404 Error</title>
   <style>
-    * {
-      line-height: 1.2;
+    body, html {
       margin: 0;
-    }
-
-    html {
-      color: #888;
-      display: table;
-      font-family: sans-serif;
+      padding: 0;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       height: 100%;
+      background-color: #f0f0f0;
+      font-family: Arial, sans-serif;
+    }
+    .container {
       text-align: center;
-      width: 100%;
     }
-
-    body {
-      display: table-cell;
-      vertical-align: middle;
-      margin: 2em auto;
+    .game-container {
+      position: relative;
+      width: 100vw;
+      height: 40vh;
+      background-image: url('img/forest-background.jpg');
+      background-size: contain;
+      border: 2px solid #004d40;
+      overflow: hidden;
     }
-
-    h1 {
-      color: #555;
-      font-size: 2em;
-      font-weight: 400;
+    .bin {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 80px;
+      background-image: url('img/bin.png');
+      background-size: cover;
+      background-position: center;
     }
-
-    p {
-      margin: 0 auto;
-      width: 280px;
+    .item {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background-size: cover;
+      background-position: center;
+      transition: top 0.1s linear;
     }
-
-    @media only screen and (max-width: 280px) {
-
-      body,
-      p {
-        width: 95%;
-      }
-
-      h1 {
-        font-size: 1.5em;
-        margin: 0 0 0.3em;
-      }
-
+    .plastic-bottle { background-image: url('img/plastic-bottle.png'); }
+    .glass-bottle { background-image: url('img/glass-bottle.png'); }
+    .can { background-image: url('img/can.png'); }
+    .pineapple { background-image: url('img/pineapple.png'); }
+    .plant { background-image: url('img/plant.png'); }
+    .tree { background-image: url('img/tree.png'); }
+    .score, .highscore {
+      font-size: 24px;
+      margin-top: 20px;
+    }
+    .game-over {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 32px;
+      color: red;
+      text-align: center;
+    }
+    .reload-button-container {
+      margin-top: 20px;
+    }
+    .reload-button {
+      padding: 10px 20px;
+      font-size: 16px;
+      color: white;
+      background-color: #00796b;
+      border: none;
+      cursor: pointer;
     }
   </style>
 </head>
-
 <body>
-  <h1>Page Not Found</h1>
-  <p>Sorry, but the page you were trying to view does not exist.</p>
-</body>
+  <div class="container">
+    <h1>404 - Page Not Found</h1>
+    <p>Oops! The page you're looking for doesn't exist. But you can help the environment while you're here!</p>
+    <div class="game-container" id="gameContainer">
+      <div class="bin" id="bin"></div>
+      <div class="game-over" id="gameOver">
+        Game Over
+      </div>
+    </div>
+    <div class="score" id="score">Score: 0</div>
+    <div class="highscore" id="highscore">High Score: 0</div>
+    <div class="reload-button-container">
+      <button class="reload-button" id="reloadButton">Reload Page</button>
+    </div>
+  </div>
+<script>
+  const gameContainer = document.getElementById('gameContainer');
+  const bin = document.getElementById('bin');
+  const scoreDisplay = document.getElementById('score');
+  const highscoreDisplay = document.getElementById('highscore');
+  const gameOverDisplay = document.getElementById('gameOver');
+  const reloadButton = document.getElementById('reloadButton');
+  let score = 0;
+  let highscore = localStorage.getItem('highscore') || 0;
+  let speed = 1000;
+  let gameInterval;
+  let gameRunning = true;
+  let acceleration = 0.05; // Acceleration for falling items
 
+  function updateBinPosition(x) {
+    const rect = gameContainer.getBoundingClientRect();
+    const binX = x - rect.left - bin.offsetWidth / 2;
+    bin.style.left = `${Math.max(0, Math.min(binX, gameContainer.offsetWidth - bin.offsetWidth))}px`;
+  }
+
+  function handleTouch(e) {
+    e.preventDefault();
+    updateBinPosition(e.touches[0].clientX);
+  }
+
+  document.addEventListener('mousemove', (e) => updateBinPosition(e.clientX));
+  document.addEventListener('touchmove', handleTouch);
+  document.addEventListener('keydown', (e) => {
+    const binX = parseInt(bin.style.left, 10) || 0;
+    if (e.key === 'ArrowLeft') {
+      updateBinPosition(binX - 20);
+    } else if (e.key === 'ArrowRight') {
+      updateBinPosition(binX + 20);
+    }
+  });
+
+  function startGame() {
+    if (!gameRunning) return;
+
+    const item = document.createElement('div');
+    item.classList.add('item');
+    item.style.left = `${Math.random() * (gameContainer.offsetWidth - 50)}px`;
+    item.style.top = '0px';
+    item.speed = Math.random() * 2 + 1; // Random speed between 1 and 3
+
+    const itemType = Math.random();
+    if (itemType < 0.2) {
+      item.classList.add('plastic-bottle');
+    } else if (itemType < 0.4) {
+      item.classList.add('glass-bottle');
+    } else if (itemType < 0.6) {
+      item.classList.add('can');
+    } else if (itemType < 0.8) {
+      item.classList.add('pineapple');
+    } else if (itemType < 0.9) {
+      item.classList.add('plant');
+    } else {
+      item.classList.add('tree');
+    }
+
+    gameContainer.appendChild(item);
+
+    let itemInterval = setInterval(() => {
+      if (!gameRunning) return;
+      let itemTop = parseFloat(item.style.top) + item.speed;
+      item.style.top = `${itemTop}px`;
+
+      const binRect = bin.getBoundingClientRect();
+      const itemRect = item.getBoundingClientRect();
+
+      // Check if the item is within the bin's horizontal range
+      const isWithinBinHorizontalRange = itemRect.left < binRect.right && itemRect.right > binRect.left;
+
+      if (itemTop > gameContainer.offsetHeight - 60) {
+        if (item.classList.contains('plastic-bottle') || item.classList.contains('glass-bottle') || item.classList.contains('can')) {
+          if (isWithinBinHorizontalRange) {
+            gameContainer.removeChild(item);
+            clearInterval(itemInterval);
+          } else {
+            gameOver();
+          }
+        } else if (item.classList.contains('pineapple') || item.classList.contains('plant') || item.classList.contains('tree')) {
+          if (isWithinBinHorizontalRange) {
+            gameOver();
+          } else {
+            gameContainer.removeChild(item);
+            clearInterval(itemInterval);
+            score++;
+            scoreDisplay.innerText = `Score: ${score}`;
+          }
+        }
+      } else if (itemTop > gameContainer.offsetHeight) {
+        if (item.classList.contains('pineapple') || item.classList.contains('plant') || item.classList.contains('tree')) {
+          gameContainer.removeChild(item);
+          clearInterval(itemInterval);
+        }
+      }
+    }, 20);
+
+    speed = Math.max(200, speed - 10); // Increase falling speed
+    clearInterval(gameInterval);
+    gameInterval = setInterval(startGame, speed);
+  }
+
+  function gameOver() {
+    gameRunning = false;
+    gameOverDisplay.style.display = 'block';
+    if (score > highscore) {
+      localStorage.setItem('highscore', score);
+      highscore = score;
+      highscoreDisplay.innerText = `High Score: ${highscore}`;
+    }
+  }
+
+  reloadButton.addEventListener('click', () => {
+    window.location.href = "home-page.html"; // Replace with the actual URL of the HTML page
+  });
+
+  function init() {
+    highscoreDisplay.innerText = `High Score: ${highscore}`;
+    startGame();
+  }
+
+  init();
+</script>
+</body>
 </html>
-<!-- IE needs 512+ bytes: https://docs.microsoft.com/archive/blogs/ieinternals/friendly-http-error-pages -->
