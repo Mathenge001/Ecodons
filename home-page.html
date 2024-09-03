@@ -8,33 +8,27 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
-<div class="header morning-gradient">
-    <div class="header-top">
-        <h1>EcoDon</h1>
-        <button class="menu-icon" onclick="toggleMenu()">&#9776;</button>
-        <button onclick="openModal()">+</button>
-        <div class="profile" onclick="openSettings()">
-            <img id="profileImage" src="default-profile-pic.jpg" alt="Profile Picture">
+       <div class="navbar">
+    <div class="navbar-header">
+        <div class="logo">EcoDon</div>
+        <div class="add-item">
+              <button onclick="openModal()">+</button>
+        </div>
+        <div class="profile">
+            <img src="path/to/profile-photo.jpg" alt="Profile" class="profile-photo">
         </div>
     </div>
-
-    <div class="search-container">
-        <input type="text" id="searchInput" placeholder="Search...">
-
-    </div>
-
-    <!-- Responsive navigation menu -->
-    <div class="responsive-menu" id="responsiveMenu">
-        <button class="close-menu" onclick="toggleMenu()">&times;</button>
-        <a href="home-page.html" class="menu-option">Products</a>
+    <div class="nav-buttons">
+       <a href="home-page.html" class="menu-option">Products</a>
         <a href="chats.html" class="menu-option">Chats</a>
         <a href="newsfeed.html" class="menu-option">Newsfeed</a>
         <a href="statistics.html" class="menu-option">Statistics</a>
     </div>
 </div>
 
-<div class="taskbar morning-gradient">
-    <button onclick="scrollToCategory('clothes')">Clothes</button>
+
+<div class="category-bar">
+   <button onclick="scrollToCategory('clothes')">Clothes</button>
     <button onclick="scrollToCategory('food')">Food</button>
     <button onclick="scrollToCategory('stationary')">Stationary</button>
     <button onclick="scrollToCategory('recyclables')">Recyclables</button>
@@ -45,6 +39,7 @@
 
 
     <div class="content morning-gradient">
+
        <!-- clothes -->
         <div class="category" id="clothes">
     <h2>Clothes</h2>

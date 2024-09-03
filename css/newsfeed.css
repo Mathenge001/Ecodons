@@ -9,34 +9,42 @@ body, h1, h2, p {
 body {
     font-family: 'Arial', sans-serif;
     line-height: 1.6;
-    background-color: #f0f8ff;
+    background: linear-gradient(to bottom, #87CEEB, #FFD700, #98FB98, #F5F5DC); /* Default gradient */
     color: #333;
 }
 
+/* Navigation bar */
 header {
-    background-color: #4CAF50;
-    color: #fff;
+    background: linear-gradient(to right, #003366, #8A2BE2, #C0C0C0); /* Night gradient */
     padding: 15px 0;
     text-align: center;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+  height: 9%;
+    z-index: 1000; /* Ensure it stays on top */
 }
 
+/* Navigation links */
 nav a {
     color: #fff;
     text-decoration: none;
-    padding: 12px 20px;
+    padding: 7px 20px;
     display: inline-block;
 }
 
 nav a:hover {
-    background-color: #45a049;
+    background-color: #8A2BE2; /* Soft Purple for hover effect */
 }
 
 .search-container {
-    margin: 15px auto;
-    max-width: 700px;
+    margin: -10px auto; /* Reduce the top margin to move the search bar upwards */
+    max-width: 100%;
     display: flex;
     justify-content: center;
 }
+
 
 #search-bar {
     width: calc(100% - 100px);
@@ -44,6 +52,7 @@ nav a:hover {
     border: 2px solid #ddd;
     border-radius: 4px;
     font-size: 1em;
+
 }
 
 #search-button {
@@ -63,6 +72,7 @@ nav a:hover {
 
 main {
     padding: 20px;
+    margin-top: 80px; /* Adjust margin for fixed header */
 }
 
 .newsfeed {

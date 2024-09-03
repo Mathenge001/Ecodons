@@ -7,23 +7,127 @@ body {
     color: #333;
 }
 
-header {
-    background-color: var(--header-background);
-    color: white;
-    padding: 10px;
-    text-align: center;
+/* General styling for the navbar and category bar */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif; /* Adjust font as needed */
 }
 
-nav {
+/* Navbar styling */
+.navbar {
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Ensures navbar is above other content */
+}
+
+.navbar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background: linear-gradient(90deg, #4a90e2, #50e3c2); /* Gradient background */
+    border-bottom: 1px solid #ccc; /* Optional border */
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff; /* Text color */
+}
+
+.add-item button {
+    font-size: 24px;
+    background-color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    color: #4a90e2; /* Adjust color as needed */
+    cursor: pointer;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+}
+
+.profile-photo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.nav-buttons {
+    display: flex;
+    justify-content: center;
+    background: linear-gradient(90deg, #50e3c2, #4a90e2); /* Gradient background */
     padding: 10px 0;
+    border-bottom: 1px solid #ccc; /* Optional border */
 }
 
 .menu-option {
-    color: white;
+    margin: 0 15px;
     text-decoration: none;
-    font-size: 18px;
+    color: #fff; /* Text color */
+    font-size: 16px;
+}
+
+.menu-option:hover {
+    text-decoration: underline;
+}
+
+/* Category bar styling */
+.category-bar {
+    display: flex;
+    overflow-x: auto; /* Allows horizontal scrolling */
+    white-space: nowrap; /* Prevents wrapping of buttons */
+    padding: 10px 0;
+    background: linear-gradient(90deg, #4a90e2, #50e3c2); /* Gradient background */
+    border-bottom: 1px solid #ccc; /* Optional border */
+    width: 100%; /* Ensures it takes full width */
+    position: fixed;
+    top: 80px; /* Adjust based on the height of the navbar */
+    left: 0;
+    z-index: 999; /* Ensures it’s above other content */
+}
+
+.category-bar button {
+    background-color: #fff; /* Button background color */
+    border: 1px solid #ccc; /* Button border color */
+    border-radius: 5px; /* Rounded corners */
+    margin: 5px; /* Space between buttons */
+    padding: 10px 15px; /* Padding inside buttons */
+    font-size: 14px; /* Font size for button text */
+    text-align: center; /* Centers text inside buttons */
+    white-space: nowrap; /* Prevents text from wrapping */
+    flex: 0 0 auto; /* Prevents buttons from shrinking */
+    cursor: pointer; /* Changes cursor to pointer on hover */
+    transition: background-color 0.3s, border-color 0.3s; /* Smooth transition for hover effect */
+}
+
+.category-bar button:hover {
+    background-color: #ddd; /* Darker background on hover */
+    border-color: #999; /* Darker border on hover */
+}
+
+/* Optional: For better scrolling experience on touch devices */
+.category-bar::-webkit-scrollbar {
+    height: 8px; /* Scrollbar height */
+}
+
+.category-bar::-webkit-scrollbar-thumb {
+    background-color: #aaa; /* Scrollbar thumb color */
+    border-radius: 5px; /* Rounded scrollbar thumb */
+}
+
+.category-bar::-webkit-scrollbar-track {
+    background-color: #f4f4f4; /* Scrollbar track color */
 }
 
 /* Chats List Section */
