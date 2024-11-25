@@ -220,6 +220,43 @@
   }
 
   init();
+
+
+  //to link this page to spreadsheet
+  function fetchHighScore() {
+    fetch(apiUrl + "?type=getHighScore&userId=" + localStorage.getItem("userId"))
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById("highScore").textContent = "High Score: " + data.highScore;
+      });
+  }
+
+  function saveHighScore(score) {
+    const scoreData = {
+      type: "saveHighScore",
+      userId: localStorage.getItem("userId"),
+      highScore: score,
+    };
+
+    fetch(apiUrl, {
+      method: "POST",
+      body: JSON.stringify(scoreData),
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+
+  // Example game logic
+  let score = 0;
+  document.getElementById("gameContainer").addEventListener("click", function() {
+    score++;
+    if (score > parseInt(document.getElementById("highScore").textContent.split(": ")[1])) {
+      saveHighScore(score);
+    }
+  });
+
+  // Fetch high score when the page loads
+  document.addEventListener("DOMContentLoaded", fetchHighScore);
 </script>
+
 </body>
 </html>

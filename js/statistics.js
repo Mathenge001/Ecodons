@@ -41,9 +41,36 @@ document.addEventListener('DOMContentLoaded', () => {
         label.textContent = `${percentage}%`;
     };
 
-    setCircleProgress(hungerCircle, hungerCircleLabel, 75);
-    setCircleProgress(co2Circle, co2CircleLabel, 60);
-    setCircleProgress(waterCircle, waterCircleLabel, 85);
+    const fetchAndUpdateCharts = () => {
+        // Fetch donations data from local storage
+        const donations = JSON.parse(localStorage.getItem('donations')) || [];
+
+        // Calculate percentages for each category
+        let totalHungerImpact = 0;
+        let totalCO2Impact = 0;
+        let totalWaterImpact = 0;
+
+        donations.forEach(donation => {
+            if (donation.category === 'Food') {
+                totalHungerImpact += donation.quantity;
+            } else if (donation.category === 'Recyclables') {
+                totalCO2Impact += donation.quantity * 0.8; // Example: 0.8 kg of CO2 saved per unit
+            } else if (donation.category === 'Water Items') {
+                totalWaterImpact += donation.quantity * 0.5; // Example: 0.5 liters saved per unit
+            }
+        });
+
+        // Example percentages (can be dynamically calculated based on goals)
+        const hungerPercentage = Math.min((totalHungerImpact / 100) * 100, 100);
+        const co2Percentage = Math.min((totalCO2Impact / 100) * 100, 100);
+        const waterPercentage = Math.min((totalWaterImpact / 100) * 100, 100);
+
+        setCircleProgress(hungerCircle, hungerCircleLabel, hungerPercentage);
+        setCircleProgress(co2Circle, co2CircleLabel, co2Percentage);
+        setCircleProgress(waterCircle, waterCircleLabel, waterPercentage);
+    };
+
+    fetchAndUpdateCharts();
 
     const goalForm = document.querySelector('#goalForm');
     const goalMessage = document.querySelector('#goalMessage');
@@ -51,7 +78,9 @@ document.addEventListener('DOMContentLoaded', () => {
     goalForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const goalAmount = goalForm.goalAmount.value;
+        localStorage.setItem('goalAmount', goalAmount); // Save the goal in local storage
         goalMessage.textContent = `Your goal of ${goalAmount} kg has been set! Keep up the great work!`;
+        fetchAndUpdateCharts(); // Update charts based on goal changes
         goalForm.reset();
     });
 
@@ -89,4 +118,13 @@ document.addEventListener('DOMContentLoaded', () => {
     leaderboardMetric.addEventListener('change', loadLeaderboard);
 
     loadLeaderboard();
+
+    // Listen for donations added from the home page
+    window.addEventListener('storage', (event) => {
+        if (event.key === 'donations') {
+            fetchAndUpdateCharts();
+        }
+    });
 });
+
+

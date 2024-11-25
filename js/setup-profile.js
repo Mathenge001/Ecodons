@@ -1,4 +1,5 @@
-document.addEventListener("DOMContentLoaded", () => {
+
+  document.addEventListener("DOMContentLoaded", () => {
     const accountTypeSelect = document.getElementById("accountType");
     const individualForm = document.getElementById("individualForm");
     const organizationForm = document.getElementById("organizationForm");
@@ -29,9 +30,9 @@ document.addEventListener("DOMContentLoaded", () => {
             organizationOtherTypeLabel.style.display = "none";
         }
     });
-});
+  });
 
-function submitIndividualForm() {
+  function submitIndividualForm() {
     const name = document.getElementById("individualName").value;
     const email = document.getElementById("individualEmail").value;
     const phone = document.getElementById("individualPhone").value;
@@ -43,29 +44,29 @@ function submitIndividualForm() {
     const bio = document.getElementById("individualBio").value;
 
     if (photo) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            const photoBase64 = e.target.result;
-            const profileData = {
-                type: "individual",
-                name,
-                email,
-                phone,
-                country,
-                county,
-                area,
-                gender,
-                photo: photoBase64,
-                bio
-            };
-            localStorage.setItem("profile", JSON.stringify(profileData));
-            window.location.href = "home-page.html";
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const photoBase64 = e.target.result;
+        const profileData = {
+          type: "individual",
+          name,
+          email,
+          phone,
+          country,
+          county,
+          area,
+          gender,
+          photo: photoBase64,
+          bio
         };
-        reader.readAsDataURL(photo);
+        localStorage.setItem("profile", JSON.stringify(profileData));
+        window.location.href = "home-page.html"; // Redirect to individual homepage
+      };
+      reader.readAsDataURL(photo);
     }
-}
+  }
 
-function submitOrganizationForm() {
+  function submitOrganizationForm() {
     const type = document.getElementById("organizationType").value;
     const otherType = document.getElementById("organizationOtherType").value;
     const name = document.getElementById("organizationName").value;
@@ -78,24 +79,24 @@ function submitOrganizationForm() {
     const bio = document.getElementById("organizationBio").value;
 
     if (photo) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            const photoBase64 = e.target.result;
-            const profileData = {
-                type: "organization",
-                orgType: type === "other" ? otherType : type,
-                name,
-                email,
-                phone,
-                country,
-                county,
-                area,
-                photo: photoBase64,
-                bio
-            };
-            localStorage.setItem("profile", JSON.stringify(profileData));
-            window.location.href = "home-page.html";
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const photoBase64 = e.target.result;
+        const profileData = {
+          type: "organization",
+          orgType: type === "other" ? otherType : type,
+          name,
+          email,
+          phone,
+          country,
+          county,
+          area,
+          photo: photoBase64,
+          bio
         };
-        reader.readAsDataURL(photo);
+        localStorage.setItem("profile", JSON.stringify(profileData));
+        window.location.href = "organ-home-page.html"; // Redirect to organization homepage
+      };
+      reader.readAsDataURL(photo);
     }
-}
+  }

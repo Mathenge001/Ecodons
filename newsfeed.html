@@ -57,6 +57,32 @@
         <p>&copy; 2024 EcoDon. All rights reserved.</p>
     </footer>
 
+
+<script>
+  function fetchNewsFeed() {
+    fetch(apiUrl + "?type=getNewsFeed")
+      .then(response => response.json())
+      .then(data => {
+        const newsFeedContainer = document.getElementById("newsFeedContainer");
+        newsFeedContainer.innerHTML = "";
+
+        data.news.forEach(post => {
+          const newsPost = document.createElement("div");
+          newsPost.innerHTML = `
+            <h3>${post.title}</h3>
+            <p>${post.description}</p>
+            <p>Posted by: ${post.author}</p>
+          `;
+          newsFeedContainer.appendChild(newsPost);
+        });
+      });
+  }
+
+  // Fetch newsfeed when the page loads
+  document.addEventListener("DOMContentLoaded", fetchNewsFeed);
+</script>
+
+
     <script src="js/newsfeed.js"></script>
 </body>
 </html>

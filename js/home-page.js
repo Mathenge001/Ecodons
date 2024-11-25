@@ -1,5 +1,4 @@
 
-
 //responsible for updating profile and name from set up
 document.addEventListener("DOMContentLoaded", () => {
     const profileData = JSON.parse(localStorage.getItem("profile"));

@@ -88,5 +88,49 @@
             </form>
         </div>
     </div>
+
+
+
+<script>
+  function fetchChats() {
+    fetch(apiUrl + "?type=getChats")
+      .then(response => response.json())
+      .then(data => {
+        const chatContainer = document.getElementById("chatContainer");
+        chatContainer.innerHTML = "";
+
+        data.chats.forEach(chat => {
+          const chatMessage = document.createElement("div");
+          chatMessage.textContent = `${chat.sender}: ${chat.message}`;
+          chatContainer.appendChild(chatMessage);
+        });
+      });
+  }
+
+  document.getElementById("sendMessageForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const messageData = {
+      type: "sendMessage",
+      senderId: localStorage.getItem("userId"), // Assume the sender ID is stored in localStorage
+      message: document.getElementById("message").value,
+    };
+
+    fetch(apiUrl, {
+      method: "POST",
+      body: JSON.stringify(messageData),
+      headers: { "Content-Type": "application/json" },
+    })
+      .then(response => response.json())
+      .then(() => {
+        fetchChats();
+        document.getElementById("message").value = "";
+      });
+  });
+
+  // Fetch chats when the page loads
+  document.addEventListener("DOMContentLoaded", fetchChats);
+</script>
+
 </body>
 </html>

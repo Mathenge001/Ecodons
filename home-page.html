@@ -188,19 +188,6 @@
                 <input type="text" id="itemName" name="itemName" required>
                 <label for="itemAmount">Amount:</label>
                 <input type="number" id="itemAmount" name="itemAmount" required>
-                <label for="itemRecipient">Recipient:</label>
-                <select id="itemRecipient" name="itemRecipient" required>
-                    <option value="organization">Organization</option>
-                    <option value="individual">Individual</option>
-                    <option value="upForGrabs">Up for Grabs</option>
-                </select>
-                <label for="recipientName">Recipient Name:</label>
-                <input type="text" id="recipientName" name="recipientName">
-                <label for="itemType">Type:</label>
-                <select id="itemType" name="itemType" required>
-                    <option value="donate">Donate</option>
-                    <option value="sell">Sell</option>
-                </select>
                 <label for="itemDescription">Description:</label>
                 <textarea id="itemDescription" name="itemDescription" rows="4" required></textarea>
                 <label for="itemLocation">Location:</label>
@@ -264,6 +251,32 @@
     }
 
     document.addEventListener('DOMContentLoaded', applyGradientBasedOnTime);
+
+
+  //for connecting homepage to the spreadsheet
+  function fetchDonatedItems() {
+    fetch(apiUrl + "?type=getItems")
+      .then(response => response.json())
+      .then(data => {
+        const itemsContainer = document.getElementById("itemsContainer");
+        itemsContainer.innerHTML = "";
+
+        data.items.forEach(item => {
+          const itemCard = document.createElement("div");
+          itemCard.innerHTML = `
+            <img src="${item.photo}" alt="${item.itemName}" width="100">
+            <h3>${item.itemName}</h3>
+            <p>Category: ${item.category}</p>
+            <p>Quantity: ${item.quantity}</p>
+            <p>Location: ${item.location}</p>
+          `;
+          itemsContainer.appendChild(itemCard);
+        });
+      });
+  }
+
+  // Fetch items when the page loads
+  document.addEventListener("DOMContentLoaded", fetchDonatedItems);
 </script>
 
 </body>

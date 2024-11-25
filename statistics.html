@@ -25,16 +25,18 @@
         <div id="personalStats" class="tab-content active">
             <section>
                 <h2>Personal Impact</h2>
-                <div class="stat-card" id="hungerCard">
-                    <div class="circle">
-                        <svg>
-                            <circle id="hungerCircle" cx="50" cy="50" r="40"></circle>
-                        </svg>
-                        <span id="hungerCircleLabel">75%</span>
-                    </div>
-                    <h3>Impact on World Hunger</h3>
-                    <p>You've helped reduce world hunger by donating food equivalent to 750 meals.</p>
-                    <div class="dropdown">
+                <div class="stats-grid">
+
+                    <!-- Hunger Impact Card -->
+                    <div class="stat-card" id="hungerCard">
+                        <div class="circle">
+                            <svg>
+                                <circle id="hungerCircle" cx="50" cy="50" r="40"></circle>
+                            </svg>
+                            <span id="hungerCircleLabel">75%</span>
+                        </div>
+                        <h3>Impact on World Hunger</h3>
+                        <p>You've contributed to reducing world hunger by donating food for 750 meals.</p>
                         <button class="dropdown-btn">View History</button>
                         <div class="dropdown-content">
                             <p>Jan 2024: 50 meals</p>
@@ -42,17 +44,17 @@
                             <p>Mar 2024: 200 meals</p>
                         </div>
                     </div>
-                </div>
-                <div class="stat-card" id="co2Card">
-                    <div class="circle">
-                        <svg>
-                            <circle id="co2Circle" cx="50" cy="50" r="40"></circle>
-                        </svg>
-                        <span id="co2CircleLabel">60%</span>
-                    </div>
-                    <h3>Impact on CO2 Levels</h3>
-                    <p>Your donations have offset 600 kg of CO2 emissions.</p>
-                    <div class="dropdown">
+
+                    <!-- CO2 Impact Card -->
+                    <div class="stat-card" id="co2Card">
+                        <div class="circle">
+                            <svg>
+                                <circle id="co2Circle" cx="50" cy="50" r="40"></circle>
+                            </svg>
+                            <span id="co2CircleLabel">60%</span>
+                        </div>
+                        <h3>Impact on CO2 Levels</h3>
+                        <p>Your efforts have offset 600 kg of CO2 emissions.</p>
                         <button class="dropdown-btn">View History</button>
                         <div class="dropdown-content">
                             <p>Jan 2024: 50 kg</p>
@@ -60,17 +62,17 @@
                             <p>Mar 2024: 200 kg</p>
                         </div>
                     </div>
-                </div>
-                <div class="stat-card" id="waterCard">
-                    <div class="circle">
-                        <svg>
-                            <circle id="waterCircle" cx="50" cy="50" r="40"></circle>
-                        </svg>
-                        <span id="waterCircleLabel">85%</span>
-                    </div>
-                    <h3>Impact on Water Usage</h3>
-                    <p>You've saved 850 liters of water through your donations.</p>
-                    <div class="dropdown">
+
+                    <!-- Water Impact Card -->
+                    <div class="stat-card" id="waterCard">
+                        <div class="circle">
+                            <svg>
+                                <circle id="waterCircle" cx="50" cy="50" r="40"></circle>
+                            </svg>
+                            <span id="waterCircleLabel">85%</span>
+                        </div>
+                        <h3>Impact on Water Usage</h3>
+                        <p>You've saved 850 liters of water through donations.</p>
                         <button class="dropdown-btn">View History</button>
                         <div class="dropdown-content">
                             <p>Jan 2024: 100 liters</p>
@@ -91,7 +93,7 @@
             </section>
         </div>
         <div id="globalStats" class="tab-content">
-            <h2>Leaderboard</h2>
+            <h2>Global Leaderboard</h2>
             <div class="leaderboard-filters">
                 <label for="leaderboardCategory">Category:</label>
                 <select id="leaderboardCategory">
@@ -107,7 +109,7 @@
                 </select>
             </div>
             <div id="leaderboard">
-                <!-- Leaderboard cards will be populated here by JavaScript -->
+                <!-- Leaderboard data populated by JS -->
             </div>
         </div>
     </main>
