@@ -95,7 +95,7 @@
           bio
         };
         localStorage.setItem("profile", JSON.stringify(profileData));
-        window.location.href = "organ-home-page.html"; // Redirect to organization homepage
+        window.location.href = "home-page.html"; // Redirect to organization homepage
       };
       reader.readAsDataURL(photo);
     }

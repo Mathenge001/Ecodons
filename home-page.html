@@ -20,8 +20,7 @@
     </div>
     <div class="nav-buttons">
        <a href="home-page.html" class="menu-option">Products</a>
-        <a href="chats.html" class="menu-option">Chats</a>
-        <a href="newsfeed.html" class="menu-option">Newsfeed</a>
+         <a href="newsfeed.html" class="menu-option">Newsfeed</a>
         <a href="statistics.html" class="menu-option">Statistics</a>
     </div>
 </div>
@@ -216,8 +215,14 @@
         <div class="modal-content">
             <span class="close" onclick="closeCart()">&times;</span>
             <h2>Your Cart</h2>
-            <div id="cartItems"></div>
-            <button onclick="checkout()">Checkout</button>
+            <!----------<div id="cartItems"></div> --------->
+          <form id="checkoutForm" action="https://formspree.io/f/myzydowk" method="POST">
+    <input type="hidden" name="userContactDetails" id="userContactDetails">
+    <input type="hidden" name="cartItems" id="cartItems">
+    <button type="submit">Checkout</button>
+</form>
+
+         <!-----   <button onclick="checkout()">Checkout</button> ------------->
         </div>
     </div>
 

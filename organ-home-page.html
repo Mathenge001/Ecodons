@@ -1,10 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoDon - Home</title>
+    <link rel="stylesheet" href="css/organ-home-page.css">
+</head>
+
+<body>
+    <!-- Header with navigation -->
+    <header>
+        <div class="navbar">
+            <button onclick="scrollToCategory('products')">Products</button>
+            <button onclick="scrollToCategory('chats')">Chats</button>
+            <button onclick="scrollToCategory('newsfeed')">Newsfeed</button>
+            <button onclick="scrollToCategory('statistics')">Statistics</button>
+            <div class="profile-section">
+                <img id="profileImage" src="img/profile.jpg" alt="Profile Image" onclick="openSettings()">
+                <span id="profileName">John Doe</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <section id="welcome">
+            <h1>Welcome to EcoDon</h1>
+            <p>Your platform to donate and conserve the environment.</p>
+        </section>
+
+        <section id="products">
+            <h2>Products</h2>
+            <div class="category-search">
+                <input type="text" id="productSearch" placeholder="Search Products">
+                <button onclick="filterItems('products')">Search</button>
+            </div>
+            <div id="productsItems" class="items">
+                <!-- Example product -->
+                <div class="item" data-name="T-shirt" data-category="Clothing" data-description="Cotton T-shirt" data-amount="10 pcs" data-location="Nairobi">
+                    <img src="img/tshirt.jpg" alt="T-shirt">
+                    <p><strong>T-shirt</strong></p>
+                    <p>10 pcs</p>
+                </div>
+                <!-- More items can be added here -->
+            </div>
+        </section>
+
+        <section id="cartSection">
+            <button onclick="openCart()">Cart</button>
+        </section>
+    </main>
+
+    <!-- Modal for Item Details -->
+    <div id="itemDetailModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeItemDetailModal()">&times;</span>
+            <div id="itemDetailContent"></div>
+        </div>
+    </div>
+
+    <!-- Modal for Cart -->
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeCart()">&times;</span>
+            <div id="cartItems"></div>
+            <button onclick="checkout()">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- Modal for Add Item -->
+    <div id="addItemModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <form id="addItemForm">
+                <label>Item Name</label><input type="text" name="itemName">
+                <label>Category</label><input type="text" name="itemCategory">
+                <label>Amount</label><input type="text" name="itemAmount">
+                <label>Location</label><input type="text" name="itemLocation">
+                <label>Description</label><input type="text" name="itemDescription">
+                <label>Image</label><input type="file" name="itemImage">
+                <button type="submit">Add Item</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/organ-home-page.js"></script>
 </body>
+
 </html>

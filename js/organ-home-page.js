@@ -1,4 +1,3 @@
-// Responsible for updating profile and name from setup
 document.addEventListener("DOMContentLoaded", () => {
     const profileData = JSON.parse(localStorage.getItem("profile"));
     if (profileData) {
@@ -7,48 +6,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-// For opening settings when profile is tapped
 function openSettings() {
     window.location.href = "check-profile.html";
 }
 
-// Example cart data and user contact information
-const cart = [
-    { name: "T-shirt", amount: "10 pcs", location: "Naka, Nakuru" },
-    { name: "Jeans", amount: "5 pcs", location: "Kahawa Wendani" }
-];
-
-const userContactDetails = {
-    name: "John Doe",
-    email: "johndoe@example.com",
-    phone: "+254700123456"
-};
-
-// Convert cart and user details to a formatted string
-function formatCartItems(cart) {
-    return cart.map(item => `Name: ${item.name}, Amount: ${item.amount}, Location: ${item.location}`).join("\n");
-}
-
-function formatUserDetails(details) {
-    return `Name: ${details.name}\nEmail: ${details.email}\nPhone: ${details.phone}`;
-}
-
-// On form submit
-document.getElementById('checkoutForm').addEventListener('submit', function (event) {
-    // Prevent default form submission to inject data dynamically
-    event.preventDefault();
-
-    // Prepare data
-    const cartDetails = formatCartItems(cart);
-    const contactDetails = formatUserDetails(userContactDetails);
-
-    // Populate hidden form fields
-    document.getElementById('userContactDetails').value = contactDetails;
-    document.getElementById('cartItems').value = cartDetails;
-
-    // Submit the form
-    this.submit();
-});
+let cart = [];
 
 function scrollToCategory(categoryId) {
     document.getElementById(categoryId).scrollIntoView({ behavior: 'smooth' });
@@ -70,8 +32,6 @@ function showItemDetails(element) {
         description: element.getAttribute('data-description'),
         amount: element.getAttribute('data-amount'),
         location: element.getAttribute('data-location'),
-        expiry: element.getAttribute('data-expiry'),
-        expiryImage: element.getAttribute('data-expiry-image'),
         imageSrc: element.querySelector('img').src
     };
     itemDetailContent.innerHTML = `
@@ -80,9 +40,7 @@ function showItemDetails(element) {
         <p><strong>Description:</strong> ${item.description}</p>
         <p><strong>Amount:</strong> ${item.amount}</p>
         <p><strong>Location:</strong> ${item.location}</p>
-        ${item.expiry ? `<p><strong>Expiry Date:</strong> ${item.expiry}</p>` : ''}
-        ${item.expiryImage ? `<img src="${item.expiryImage}" alt="Expiry Date" style="width: 100%; border-radius: 10px;">` : ''}
-        <button onclick="addToCart('${item.name}', '${item.category}', '${item.imageSrc}')">Get/Buy</button>
+        <button onclick="addToCart('${item.name}', '${item.category}', '${item.imageSrc}')">Add to Cart</button>
     `;
     document.getElementById('itemDetailModal').style.display = 'block';
 }
@@ -117,7 +75,21 @@ function closeCart() {
 
 function checkout() {
     alert('Proceeding to checkout...');
+    // Implement checkout logic
     cart = [];
     closeCart();
 }
 
+function filterItems(category) {
+    const searchInput = document.querySelector(`#${category} .category-search`);
+    const query = searchInput.querySelector('input').value.toLowerCase();
+    const items = document.querySelectorAll(`#${category} .item`);
+    items.forEach(item => {
+        const name = item.getAttribute('data-name').toLowerCase();
+        if (name.includes(query)) {
+            item.style.display = 'block';
+        } else {
+            item.style.display = 'none';
+        }
+    });
+}
